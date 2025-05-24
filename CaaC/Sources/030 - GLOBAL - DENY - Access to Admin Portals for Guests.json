@@ -1,0 +1,57 @@
+{
+  "displayName": "[Prefix]030 - GLOBAL - DENY - Access to Admin Portals for Guests",
+  "state": "[State]",
+  "conditions": {
+    "platforms": null,
+    "userRiskLevels": [],
+    "clientApplications": null,
+    "times": null,
+    "deviceStates": null,
+    "users": {
+      "includeGuestsOrExternalUsers": {
+        "externalTenants": {
+          "membershipKind": "all",
+          "@odata.type": "#microsoft.graph.conditionalAccessAllExternalTenants"
+        },
+        "guestOrExternalUserTypes": "internalGuest,b2bCollaborationGuest,b2bCollaborationMember,b2bDirectConnectUser,otherExternalUser"
+      },
+      "includeGroups": [],
+      "excludeGuestsOrExternalUsers": null,
+      "includeUsers": [],
+      "excludeUsers": [],
+      "excludeGroups": [
+        "[PREFIX]CA Exclude ALL",
+        "[PREFIX]CA Exclude - 030 - GLOBAL - DENY - Access to Admin Portals for Guests"
+      ],
+      "excludeRoles": [],
+      "includeRoles": []
+    },
+    "devices": null,
+    "locations": null,
+    "clientAppTypes": [
+      "all"
+    ],
+    "applications": {
+      "applicationFilter": null,
+      "excludeApplications": [],
+      "includeUserActions": [],
+      "includeApplications": [
+        "MicrosoftAdminPortals",
+        "797f4846-ba00-4fd7-ba43-dac1f8f63013"
+      ],
+      "includeAuthenticationContextClassReferences": []
+    },
+    "signInRiskLevels": []
+  },
+  "grantControls": {
+    "operator": "OR",
+    "builtInControls": [
+      "block"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "authenticationStrength": null
+  },
+  "sessionControls": null,
+  "templateId": null
+}

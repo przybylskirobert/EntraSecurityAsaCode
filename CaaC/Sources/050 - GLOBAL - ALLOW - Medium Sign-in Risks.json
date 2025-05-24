@@ -1,0 +1,68 @@
+{
+  "displayName": "[Prefix]050 - GLOBAL - ALLOW - Medium Sign-in Risks",
+  "state": "[State]",
+  "conditions": {
+    "platforms": null,
+    "userRiskLevels": [],
+    "clientApplications": null,
+    "times": null,
+    "deviceStates": null,
+    "users": {
+      "includeGuestsOrExternalUsers": null,
+      "includeGroups": [],
+      "excludeGuestsOrExternalUsers": null,
+      "includeUsers": [
+        "All"
+      ],
+      "excludeUsers": [],
+      "excludeGroups": [
+        "[Prefix]CA Exclude ALL",
+        "[Prefix]CA Exclude - 050 - GLOBAL - ALLOW - Medium Sign-in Risks"
+      ],
+      "excludeRoles": [],
+      "includeRoles": []
+    },
+    "devices": null,
+    "locations": null,
+    "clientAppTypes": [
+      "all"
+    ],
+    "applications": {
+      "applicationFilter": null,
+      "excludeApplications": [],
+      "includeUserActions": [],
+      "includeApplications": [
+        "All"
+      ],
+      "includeAuthenticationContextClassReferences": []
+    },
+    "signInRiskLevels": [
+      "medium"
+    ]
+  },
+  "grantControls": {
+    "operator": "OR",
+    "builtInControls": [],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "authenticationStrength": {
+      "id": "00000000-0000-0000-0000-000000000002"
+    }
+  },
+  "sessionControls": {
+    "cloudAppSecurity": null,
+    "continuousAccessEvaluation": null,
+    "applicationEnforcedRestrictions": null,
+    "signInFrequency": {
+      "type": null,
+      "value": null,
+      "frequencyInterval": "everyTime",
+      "authenticationType": "primaryAndSecondaryAuthentication",
+      "isEnabled": true
+    },
+    "secureSignInSession": null,
+    "persistentBrowser": null,
+    "disableResilienceDefaults": null
+  },
+  "templateId": null
+}

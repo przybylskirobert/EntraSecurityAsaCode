@@ -1,0 +1,16 @@
+{
+  "BlockMsolPowerShell": true,
+  "DefaultUserRolePermissions": {
+    "AllowedToReadOtherUsers": true,
+    "AllowedToCreateSecurityGroups": false,
+    "AllowedToCreateApps": false,
+    "AllowedToCreateTenants": false,
+    "AllowedToReadBitlockerKeysForOwnedDevice": false
+  },
+  "AllowEmailVerifiedUsersToJoinOrganization": false,
+  "AllowedToUseSspr": false,
+  "AllowedToSignUpEmailBasedSubscriptions": false,
+  "AllowUserConsentForRiskyApps": false,
+  "GuestUserRoleId": "10dae51f-b6af-4016-8d66-8c2a99b929b3",
+  "AllowInvitesFrom": "adminsAndGuestInviters"
+}

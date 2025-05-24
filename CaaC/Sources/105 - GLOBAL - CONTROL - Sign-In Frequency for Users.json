@@ -1,0 +1,74 @@
+{
+  "displayName": "[prefix]105 - GLOBAL - CONTROL - Sign-In Frequency for Users",
+  "state": "[State]",
+  "conditions": {
+"platforms": null,
+    "userRiskLevels": [],
+    "clientApplications": null,
+    "times": null,
+    "deviceStates": null,
+    "users": {
+      "includeGuestsOrExternalUsers": null,
+      "includeGroups": [],
+      "excludeGuestsOrExternalUsers": null,
+      "includeUsers": [
+        "All"
+      ],
+      "excludeUsers": [],
+      "excludeGroups": [
+        "[Prefix]CA Exclude ALL",
+        "[Prefix]CA Exclude - Service Accounts",
+        "[Prefix]CA Exclude - 105 - GLOBAL - CONTROL - Sign-In Frequency for Users"
+      ],
+      "excludeRoles": [
+        "9b895d92-2cd3-44c7-9d02-a6ac2d5ea5c3",
+        "0526716b-113d-4c15-b2c8-68e3c22b9f80",
+        "158c047a-c907-4556-b7ef-446551a6b5f7",
+        "17315797-102d-40b4-93e0-432062caca18",
+        "e6d1a23a-da11-4be4-9570-befc86d067a7",
+        "b1be1c3e-b65d-4f19-8427-f6fa0d97feb9",
+        "62e90394-69f5-4237-9190-012177145e10",
+        "8ac3fc64-6eca-42ea-9e69-59f4c7b60eb2",
+        "7be44c8a-adaf-4e2a-84d6-ab2649e08a13",
+        "e8611ab8-c189-46e8-94e1-60213ab1f814",
+        "194ae4cb-b126-40b2-bd5b-6091b380977d"
+      ],
+      "includeRoles": []
+    },
+    "devices": null,
+    "locations": null,
+    "clientAppTypes": [
+      "all"
+    ],
+    "applications": {
+      "applicationFilter": null,
+      "excludeApplications": [],
+      "includeUserActions": [],
+      "includeApplications": [
+        "All"
+      ],
+      "includeAuthenticationContextClassReferences": []
+    },
+    "signInRiskLevels": []
+  },
+  "grantControls": null,
+  "sessionControls": {
+    "signInFrequency": {
+      "frequencyInterval": "timeBased",
+      "type": "hours",
+      "value": 8,
+      "isEnabled": true,
+      "authenticationType": "primaryAndSecondaryAuthentication"
+    },
+    "cloudAppSecurity": null,
+    "secureSignInSession": null,
+    "disableResilienceDefaults": null,
+    "applicationEnforcedRestrictions": null,
+    "persistentBrowser": {
+      "mode": "never",
+      "isEnabled": true
+    },
+    "continuousAccessEvaluation": null
+  },
+  "templateId": null
+}

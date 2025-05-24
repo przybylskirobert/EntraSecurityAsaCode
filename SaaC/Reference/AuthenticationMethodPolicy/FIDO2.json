@@ -1,0 +1,37 @@
+{
+    "uri": "https://graph.microsoft.com/beta/authenticationMethodsPolicy",
+    "url": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/AuthenticationMethodsMenuBlade/~/AdminAuthMethods/fromNav/Identity",
+    "name": "Policy Authorization Policy",
+    "config": {
+        "displayName": "Authentication Methods Policy",
+        "authenticationMethodConfigurations": [
+            {
+                "state": "enabled",
+                "includeTargets@odata.context": "https://graph.microsoft.com/beta/$metadata#authenticationMethodsPolicy/authenticationMethodConfigurations('Fido2')/microsoft.graph.fido2AuthenticationMethodConfiguration/includeTargets",
+                "keyRestrictions": {
+                    "enforcementType": "allow",
+                    "aaGuids": [
+                        "90a3ccdf-635c-4729-a248-9b709135078f",
+                        "de1e552d-db1d-4423-a619-566b625cdc84"
+                    ],
+                    "isEnforced": true
+                },
+                "id": "Fido2",
+                "@odata.type": "#microsoft.graph.fido2AuthenticationMethodConfiguration",
+                "defaultPasskeyProfile": null,
+                "passkeyProfiles": [],
+                "includeTargets": [
+                    {
+                        "isRegistrationRequired": false,
+                        "targetType": "group",
+                        "allowedPasskeyProfiles": [],
+                        "id": "all_users"
+                    }
+                ],
+                "isSelfServiceRegistrationAllowed": true,
+                "excludeTargets": [],
+                "isAttestationEnforced": true
+            }
+        ]
+    }
+}

@@ -1,0 +1,26 @@
+{
+  "uri": "https://graph.microsoft.com/beta/authenticationMethodsPolicy",
+  "url": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/AuthenticationMethodsMenuBlade/~/AdminAuthMethods/fromNav/Identity",
+  "name": "Policy Authorization Policy",
+  "config": {
+    "displayName": "Authentication Methods Policy",
+    "authenticationMethodConfigurations": [
+      {
+        "state": "disabled",
+        "includeTargets": [
+          {
+            "isRegistrationRequired": false,
+            "targetType": "group",
+            "id": "all_users"
+          }
+        ],
+        "@odata.type": "#microsoft.graph.qrCodePinAuthenticationMethodConfiguration",
+        "includeTargets@odata.context": "https://graph.microsoft.com/beta/$metadata#authenticationMethodsPolicy/authenticationMethodConfigurations('QRCodePin')/microsoft.graph.qrCodePinAuthenticationMethodConfiguration/includeTargets",
+        "excludeTargets": [],
+        "standardQRCodeLifetimeInDays": 365,
+        "id": "QRCodePin",
+        "pinLength": 8
+      }
+    ]
+  }
+}

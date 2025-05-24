@@ -1,0 +1,25 @@
+{
+    "uri": "https://graph.microsoft.com/beta/authenticationMethodsPolicy",
+    "url": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/AuthenticationMethodsMenuBlade/~/AdminAuthMethods/fromNav/Identity",
+    "name": "Policy Authorization Policy",
+    "config": {
+        "displayName": "Authentication Methods Policy",
+        "authenticationMethodConfigurations": [
+            {
+                "@odata.type": "#microsoft.graph.smsAuthenticationMethodConfiguration",
+                "excludeTargets": [],
+                "includeTargets": [
+                    {
+                        "isRegistrationRequired": false,
+                        "targetType": "group",
+                        "id": "all_users",
+                        "isUsableForSignIn": false
+                    }
+                ],
+                "state": "disabled",
+                "id": "Sms",
+                "includeTargets@odata.context": "https://graph.microsoft.com/beta/$metadata#authenticationMethodsPolicy/authenticationMethodConfigurations('Sms')/microsoft.graph.smsAuthenticationMethodConfiguration/includeTargets"
+            }
+        ]
+    }
+}

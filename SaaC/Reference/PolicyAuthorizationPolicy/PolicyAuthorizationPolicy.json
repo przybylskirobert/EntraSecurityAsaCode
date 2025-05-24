@@ -1,0 +1,19 @@
+{
+  "url": "https://entra.microsoft.com/#view/Microsoft_AAD_UsersAndTenants/UserManagementMenuBlade/~/UserSettings/menuId/UserSettings and https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ConsentPoliciesMenuBlade/~/UserSettings",
+  "name": "Policy Authorization Policy",
+  "AllowEmailVerifiedUsersToJoinOrganization": false,
+  "AllowInvitesFrom": "adminsAndGuestInviters",
+  "AllowUserConsentForRiskyApps": false,
+  "AllowedToSignUpEmailBasedSubscriptions": false,
+  "AllowedToUseSspr": false,
+  "BlockMsolPowerShell": true,
+  "DefaultUserRolePermissions": {
+    "AllowedToCreateTenants": false,
+    "AllowedToCreateSecurityGroups": false,
+    "AllowedToCreateApps": false,
+    "AllowedToReadBitlockerKeysForOwnedDevice": false,
+    "AllowedToReadOtherUsers": true,
+    "PermissionGrantPoliciesAssigned":[]
+  },
+  "GuestUserRoleId": "10dae51f-b6af-4016-8d66-8c2a99b929b3"
+}

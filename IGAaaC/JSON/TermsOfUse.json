@@ -1,0 +1,10 @@
+{
+  "DisplayName": "Terms of Use",
+  "Language": "en-us",
+  "RequireAcknowledgment": true,
+  "RequireConsentOnEveryDevice": false,
+  "ExpireConsents": true,
+  "ExpireConsentsFrequency": 180,
+  "ConsentsFrequency": 45,
+  "StartDate": "2025-06-01"
+}

@@ -1,0 +1,76 @@
+{
+  "displayName": "[prefix]110 - GLOBAL - CONTROL - BYOD devices",
+  "state": "[State]",
+  "conditions": {
+    "platforms": null,
+    "userRiskLevels": [],
+    "clientApplications": null,
+    "times": null,
+    "deviceStates": null,
+    "users": {
+      "includeGuestsOrExternalUsers": null,
+      "includeGroups": [],
+      "excludeGuestsOrExternalUsers": {
+        "externalTenants": {
+          "membershipKind": "all",
+          "@odata.type": "#microsoft.graph.conditionalAccessAllExternalTenants"
+        },
+        "guestOrExternalUserTypes": "internalGuest,b2bCollaborationGuest,b2bCollaborationMember,b2bDirectConnectUser,otherExternalUser,serviceProvider"
+      },
+      "includeUsers": [
+        "All"
+      ],
+      "excludeUsers": [],
+      "excludeGroups": [
+        "[Prefix]CA Exclude ALL",
+        "[Prefix]CA Exclude - 110 - GLOBAL - CONTROL - BYOD devices"
+      ],
+      "excludeRoles": [],
+      "includeRoles": []
+    },
+    "devices": {
+      "excludeDevices": [],
+      "excludeDeviceStates": [],
+      "includeDevices": [],
+      "includeDeviceStates": [],
+      "deviceFilter": {
+        "mode": "exclude",
+        "rule": "device.isCompliant -eq True"
+      }
+    },
+    "locations": null,
+    "clientAppTypes": [
+      "all"
+    ],
+    "applications": {
+      "applicationFilter": null,
+      "excludeApplications": [],
+      "includeUserActions": [],
+      "includeApplications": [
+        "All"
+      ],
+      "includeAuthenticationContextClassReferences": []
+    },
+    "signInRiskLevels": []
+  },
+  "grantControls": null,
+  "sessionControls": {
+    "signInFrequency": {
+      "frequencyInterval": "timeBased",
+      "type": "hours",
+      "value": 9,
+      "isEnabled": true,
+      "authenticationType": "primaryAndSecondaryAuthentication"
+    },
+    "cloudAppSecurity": null,
+    "secureSignInSession": null,
+    "disableResilienceDefaults": null,
+    "applicationEnforcedRestrictions": null,
+    "persistentBrowser": {
+      "mode": "never",
+      "isEnabled": true
+    },
+    "continuousAccessEvaluation": null
+  },
+  "templateId": null
+}

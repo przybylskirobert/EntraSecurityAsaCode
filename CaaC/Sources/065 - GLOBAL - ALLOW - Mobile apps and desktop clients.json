@@ -1,0 +1,61 @@
+{
+  "displayName": "[Prefix]065 - GLOBAL - ALLOW - Mobile apps and desktop clients",
+  "state": "[State]",
+  "conditions": {
+    "platforms": {
+      "includePlatforms": [
+        "android",
+        "iOS"
+      ],
+      "excludePlatforms": []
+    },
+    "userRiskLevels": [],
+    "clientApplications": null,
+    "times": null,
+    "deviceStates": null,
+    "users": {
+      "includeGuestsOrExternalUsers": null,
+      "includeGroups": [],
+      "excludeGuestsOrExternalUsers": null,
+      "includeUsers": [
+        "All"
+      ],
+      "excludeUsers": [],
+      "excludeGroups": [
+        "[Prefix]CA Exclude ALL",
+        "[Prefix]CA Exclude - Service Accounts",
+        "[Prefix]CA Exclude - 065 - GLOBAL - ALLOW - Mobile apps and desktop clients"
+      ],
+      "excludeRoles": [
+        "d29b2b05-8046-44ba-8758-1e26182fcf32"
+      ],
+      "includeRoles": []
+    },
+    "devices": null,
+    "locations": null,
+    "clientAppTypes": [
+      "mobileAppsAndDesktopClients"
+    ],
+    "applications": {
+      "applicationFilter": null,
+      "excludeApplications": [],
+      "includeUserActions": [],
+      "includeApplications": [
+        "All"
+      ],
+      "includeAuthenticationContextClassReferences": []
+    },
+    "signInRiskLevels": []
+  },
+  "grantControls": {
+    "operator": "OR",
+    "builtInControls": [
+      "compliantApplication"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "authenticationStrength": null
+  },
+  "sessionControls": null,
+  "templateId": null
+}

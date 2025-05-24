@@ -1,0 +1,56 @@
+{
+    "uri": "https://graph.microsoft.com/beta/authenticationMethodsPolicy",
+    "url": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/AuthenticationMethodsMenuBlade/~/AdminAuthMethods/fromNav/Identity",
+    "name": "Policy Authorization Policy",
+    "config": {
+        "displayName": "Authentication Methods Policy",
+        "authenticationMethodConfigurations": [
+            {
+                "state": "disabled",
+                "issuerHintsConfiguration": {
+                    "state": "disabled"
+                },
+                "crlValidationConfiguration": {
+                    "state": "disabled",
+                    "exemptedCertificateAuthoritiesSubjectKeyIdentifiers": []
+                },
+                "includeTargets@odata.context": "https://graph.microsoft.com/beta/$metadata#authenticationMethodsPolicy/authenticationMethodConfigurations('X509Certificate')/microsoft.graph.x509CertificateAuthenticationMethodConfiguration/includeTargets",
+                "id": "X509Certificate",
+                "@odata.type": "#microsoft.graph.x509CertificateAuthenticationMethodConfiguration",
+                "includeTargets": [
+                    {
+                        "isRegistrationRequired": false,
+                        "targetType": "group",
+                        "id": "all_users"
+                    }
+                ],
+                "authenticationModeConfiguration": {
+                    "x509CertificateDefaultRequiredAffinityLevel": "low",
+                    "x509CertificateAuthenticationDefaultMode": "x509CertificateSingleFactor",
+                    "rules": []
+                },
+                "certificateUserBindings": [
+                    {
+                        "trustAffinityLevel": "low",
+                        "priority": 1,
+                        "userProperty": "userPrincipalName",
+                        "x509CertificateField": "PrincipalName"
+                    },
+                    {
+                        "trustAffinityLevel": "low",
+                        "priority": 2,
+                        "userProperty": "userPrincipalName",
+                        "x509CertificateField": "RFC822Name"
+                    },
+                    {
+                        "trustAffinityLevel": "high",
+                        "priority": 3,
+                        "userProperty": "certificateUserIds",
+                        "x509CertificateField": "SubjectKeyIdentifier"
+                    }
+                ],
+                "excludeTargets": []
+            }
+        ]
+    }
+}

@@ -1,0 +1,57 @@
+{
+  "displayName": "[PREFIX]020 - GLOBAL - DENY - Blocked Risky Countries",
+  "state": "[State]",
+  "conditions": {
+    "platforms": null,
+    "userRiskLevels": [],
+    "clientApplications": null,
+    "times": null,
+    "locations": {
+      "excludeLocations": [],
+      "includeLocations": [
+        "[Prefix]Risky Countries"
+      ]
+    },
+    "deviceStates": null,
+    "users": {
+      "includeGuestsOrExternalUsers": null,
+      "includeGroups": [],
+      "excludeGuestsOrExternalUsers": null,
+      "includeUsers": [
+        "All"
+      ],
+      "excludeUsers": [],
+      "excludeGroups": [
+        "[PREFIX]CA Exclude ALL",
+        "[PREFIX]CA Exclude - 020 - GLOBAL - DENY - Blocked Risky Countries"
+      ],
+      "excludeRoles": [],
+      "includeRoles": []
+    },
+    "devices": null,
+    "clientAppTypes": [
+      "all"
+    ],
+    "applications": {
+      "applicationFilter": null,
+      "excludeApplications": [],
+      "includeUserActions": [],
+      "includeApplications": [
+        "All"
+      ],
+      "includeAuthenticationContextClassReferences": []
+    },
+    "signInRiskLevels": []
+  },
+  "grantControls": {
+    "operator": "OR",
+    "builtInControls": [
+      "block"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "authenticationStrength": null
+  },
+  "sessionControls": null,
+  "templateId": null
+}

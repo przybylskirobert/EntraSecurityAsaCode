@@ -1,0 +1,24 @@
+{
+  "uri": "https://graph.microsoft.com/beta/authenticationMethodsPolicy",
+  "url": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/AuthenticationMethodsMenuBlade/~/AdminAuthMethods/fromNav/Identity",
+  "name": "Policy Authorization Policy",
+  "config": {
+    "displayName": "Authentication Methods Policy",
+    "authenticationMethodConfigurations": [
+      {
+        "@odata.type": "#microsoft.graph.hardwareOathAuthenticationMethodConfiguration",
+        "excludeTargets": [],
+        "includeTargets": [
+          {
+            "isRegistrationRequired": false,
+            "targetType": "group",
+            "id": "all_users"
+          }
+        ],
+        "state": "disabled",
+        "id": "HardwareOath",
+        "includeTargets@odata.context": "https://graph.microsoft.com/beta/$metadata#authenticationMethodsPolicy/authenticationMethodConfigurations('HardwareOath')/microsoft.graph.hardwareOathAuthenticationMethodConfiguration/includeTargets"
+      }
+    ]
+  }
+}

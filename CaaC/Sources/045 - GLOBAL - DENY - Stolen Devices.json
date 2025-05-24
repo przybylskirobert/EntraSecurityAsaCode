@@ -1,0 +1,58 @@
+{
+  "displayName": "[Prefix]045 - GLOBAL - DENY - Stolen Devices",
+  "state": "[State]",
+  "conditions": {
+    "platforms": null,
+    "userRiskLevels": [
+    ],
+    "clientApplications": null,
+    "times": null,
+    "deviceStates": null,
+    "users": {
+      "includeGuestsOrExternalUsers": null,
+      "includeGroups": [],
+      "excludeGuestsOrExternalUsers": null,
+      "includeUsers": [
+        "All"
+      ],
+      "excludeUsers": [],
+      "excludeGroups": [
+        "[Prefix]CA Exclude ALL",
+        "[Prefix]CA Exclude - 045 - GLOBAL - DENY - Stolen Devices"
+      ],
+      "excludeRoles": [],
+      "includeRoles": []
+    },
+    "Devices": {
+      "DeviceFilter": {
+        "Mode": "include",
+        "Rule": "device.displayName -eq \"AP-J24BT64\" -or device.displayName -eq \"AP-2M2BT64\" -or device.displayName -eq \"AP-6P2BT64\" -or device.displayName -eq \"AP-DX3BT64\" -or device.deviceId -eq \"84c53f14-7317-45ba-b470-2ca7c9e13d13\" -or device.deviceId -eq \"5838a701-53f8-4fc7-91f1-4896dc237a35\" -or device.deviceId -eq \"912abddb-7936-480a-8479-24f4f421caa2\" -or device.deviceId -eq \"6d77e2b8-5aed-4774-8aea-d1c92e2af281\""
+      }
+    },
+    "locations": null,
+    "clientAppTypes": [
+      "all"
+    ],
+    "applications": {
+      "applicationFilter": null,
+      "excludeApplications": [],
+      "includeUserActions": [],
+      "includeApplications": [
+        "All"
+      ],
+      "includeAuthenticationContextClassReferences": []
+    },
+    "signInRiskLevels": []
+  },
+  "grantControls": {
+    "operator": "OR",
+    "builtInControls": [
+      "block"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "authenticationStrength": null
+  },
+  "sessionControls": null,
+  "templateId": null
+}

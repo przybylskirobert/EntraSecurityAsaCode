@@ -1,0 +1,25 @@
+{
+  "uri": "https://graph.microsoft.com/beta/authenticationMethodsPolicy",
+  "url": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/AuthenticationMethodsMenuBlade/~/AdminAuthMethods/fromNav/Identity" ,
+  "name": "Policy Authorization Policy",
+  "config": {
+    "displayName": "Authentication Methods Policy",
+    "authenticationMethodConfigurations": [
+      {
+        "excludeTargets": [],
+        "@odata.type": "#microsoft.graph.emailAuthenticationMethodConfiguration",
+        "allowExternalIdToUseEmailOtp": "default",
+        "includeTargets": [
+          {
+            "isRegistrationRequired": false,
+            "targetType": "group",
+            "id": "all_users"
+          }
+        ],
+        "state": "disabled",
+        "id": "Email",
+        "includeTargets@odata.context": "https://graph.microsoft.com/beta/$metadata#authenticationMethodsPolicy/authenticationMethodConfigurations('Email')/microsoft.graph.emailAuthenticationMethodConfiguration/includeTargets"
+      }
+    ]
+  }
+}

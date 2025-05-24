@@ -1,0 +1,61 @@
+{
+    "displayName": "[Prefix]080 - GLOBAL - ALLOW - Users RegisterOrJoin device with MFA",
+    "state": "[State]",
+    "conditions": {
+      "platforms": {
+        "includePlatforms": [
+          "android",
+          "iOS"
+        ],
+        "excludePlatforms": []
+      },
+      "userRiskLevels": [],
+      "clientApplications": null,
+      "times": null,
+      "deviceStates": null,
+      "users": {
+        "includeGuestsOrExternalUsers": null,
+        "includeGroups": [],
+        "excludeGuestsOrExternalUsers": null,
+        "includeUsers": [
+          "All"
+        ],
+        "excludeUsers": [],
+        "excludeGroups": [
+          "[Prefix]CA Exclude ALL",
+          "[Prefix]CA Exclude - Service Accounts",
+          "[Prefix]CA Exclude - 080 - GLOBAL - ALLOW - Users RegisterOrJoin device with MFA"
+        ],
+        "excludeRoles": [],
+        "includeRoles": []
+      },
+      "devices": null,
+      "locations": null,
+      "clientAppTypes": [
+        "All"
+      ],
+      "applications": {
+        "applicationFilter": null,
+        "excludeApplications": [],
+        "includeUserActions": [
+            "urn:user:registerdevice"
+        ],
+        "includeApplications": [
+        ],
+        "includeAuthenticationContextClassReferences": []
+      },
+      "signInRiskLevels": []
+    },
+    "grantControls": {
+      "operator": "OR",
+      "builtInControls": [
+        "mfa"
+      ],
+      "customAuthenticationFactors": [],
+      "termsOfUse": [],
+      "authenticationStrength": null
+    },
+    "sessionControls": null,
+    "templateId": null
+  }
+  

@@ -1,0 +1,18 @@
+{
+  "uri": "https://graph.microsoft.com/v1.0/policies/adminConsentRequestPolicy",
+  "url": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ConsentPoliciesMenuBlade/~/AdminConsentSettings" ,
+  "name": "Admin Consent Request Policy",
+  "config": {
+    "isEnabled": true,
+    "notifyReviewers": true,
+    "remindersEnabled": true,
+    "requestDurationInDays": 30,
+    "reviewers": [
+      {
+        "queryType": "MicrosoftGraph",
+        "queryRoot": null,
+        "query": "/v1.0/groups/GROUPID/transitiveMembers/microsoft.graph.user"
+      }
+    ]
+  }
+}

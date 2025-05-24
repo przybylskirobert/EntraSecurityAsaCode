@@ -1,0 +1,68 @@
+cd ./caac/
+$List = @(
+    $(New-Object PSObject -Property @{Name = "Allowed Countries";CountryList = "PL,IN,US";IP= ""}),
+    $(New-Object PSObject -Property @{Name = "Risky Countries";CountryList = "BY,KP,RU,IR";IP = ""}),
+    $(New-Object PSObject -Property @{Name = "Trusted IPs for service accounts";CountryList = "";IP = "109.241.14.130/32"})
+)
+./New-EntraIDNamedLocation.ps1 -List $List -Prefix "LAB" -EnableLogs
+
+$List = @(
+    $(New-Object PSObject -Property @{Name = "[Prefix]CA Exclude ALL"}),
+    $(New-Object PSObject -Property @{Name = "[Prefix]CA Include - Service Accounts"}),
+    $(New-Object PSObject -Property @{Name = "[Prefix]CA Exclude - Service Accounts"}),
+    $(New-Object PSObject -Property @{Name = "[Prefix]CA Include - Admins"})
+)
+./New-EntraIDGroups.ps1 -List $List -Prefix "LAB" -EnableLogs
+
+./New-EntraIDConditionalAccessPolicyFromJson.ps1 -Prefix "LAB" -Mode "Report-Only" -EnableLogs -SourcesLocation "./Sources"
+cd..
+cd ./SaaC/       
+./Set-EntraIDAdminConsentRequestPolicy.ps1 -EnableLogs -BackupSettings -ConfigurePolicy -GroupName "LAB - Admin consent requests"
+
+./Set-EntraIDPasswordRuleSettings.ps1 -EnableLogs -BackupSettings -ConfigurePolicy
+
+./Set-EntraIDPolicyAuthorizationPolicy.ps1 -EnableLogs -ConfigurePolicy -BackupSettings
+
+cd..
+cd ./IGAaaC/
+./Export-EntraIDRolesNamesID.ps1
+
+$jsonPath = "./JSON/T2_PIM.json"
+$config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
+
+foreach ($role in $config.PIMRoles){
+
+    ./Set-EntraIDPIMRole.ps1 -RoleName $role.RoleName `
+    -ActivationMaxDurationInHours $role.AssignmentPolicy.ActivationMaxDurationInHours `
+    -ExpireEligibleAssignmentsAfterDays $role.AssignmentPolicy.ExpireEligibleAssignmentsAfterDays `
+    -ExpireActiveAssignmentsAfterDays $role.AssignmentPolicy.ExpireActiveAssignmentsAfterDays `
+    -RequireMFAOnActiveAssignement:$role.AssignmentPolicy.RequireMFAOnActiveAssignement`
+    -RequireJustificationOnActiveAssignement:$role.AssignmentPolicy.RequireJustificationOnActiveAssignement`
+    -RequireMFAOnActivation:$role.AssignmentPolicy.RequireMFAOnActivation`
+    -RequireJustificationOnActivation:$role.AssignmentPolicy.RequireJustificationOnActivation`
+    -RequireApprovalOnActivation:$role.AssignmentPolicy.RequireApprovalOnActivation`
+    -Prefix $config.Prefix `
+    -EnableLogs
+}
+
+./New-EntraIDToU.ps1 -DisplayName 'LAB - Terms of Use' -Language en-us -RequireAcknowledgment -RequireConsentOnEveryDevice -ExpireConsents -ExpireConsentsFrequency P180D -ConsentsFrequency 45 -StartDate 2025.01.01 -EnableLogs
+
+./Set-EntraIDELMSettings.ps1 -externalUserLifecycleAction blockSignInAndDelete -DurationUntilExternalUserDeletedAfterBlocked 25 -EnableLogs
+
+$jsonPath = "./JSON/EntitlementManagement.json"
+$config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
+foreach ($organization in $config.ConnectedOrganizations){
+
+    ./Set-EntraIDELMConnectedOrganizations `
+    -DisplayName $organization.DisplayName`
+    -ConfigurationType $organization.ConfigurationType `
+    -DomainName $organization.DomainName `
+    -State $organization.State `
+    -EnableLogs
+}
+
+cd ./v2/
+$jsonPath =  "/Users/robert/Library/CloudStorage/OneDrive-Personal/04_Repos/Projekty/formula5/ms-entra-id-gov-automation/IGAaaC/v2/JSON/EntitlementManagement_V2.json"
+./Set-EntraIDELMCatalog_v2.ps1 -JsonPath $jsonPath
+./New-EntraIDELMAccessPackage_v2.ps1 -JsonPath $jsonPath    
+./New-EntraIDELMAccessReview_v2.ps1 -JsonPath $jsonPath

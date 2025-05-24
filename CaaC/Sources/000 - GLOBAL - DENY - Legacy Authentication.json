@@ -1,0 +1,40 @@
+{
+    "displayName": "[PREFIX]000 - GLOBAL - DENY - Legacy Authentication",
+    "state": "[State]",
+    "conditions": {
+        "users": {
+            "includeUsers": [ "All" ],
+            "excludeUsers": [],
+            "excludeGroups": [
+                "[PREFIX]CA Exclude ALL",
+                "[PREFIX]CA Exclude - 000 - GLOBAL - DENY - Legacy Authentication"
+            ],
+            "includeGroups": [],
+            "includeRoles": [],
+            "excludeRoles": []
+        },
+        "applications": {
+            "includeApplications": [ "All" ],
+            "excludeApplications": [],
+            "includeUserActions": [],
+            "includeAuthenticationContextClassReferences": []
+        },
+        "clientAppTypes": [
+            "exchangeActiveSync",
+            "other"
+        ],
+        "signInRiskLevels": [],
+        "userRiskLevels": []
+    },
+    "grantControls": {
+        "operator": "OR",
+        "builtInControls": [
+            "block"
+        ],
+        "customAuthenticationFactors": [],
+        "termsOfUse": [],
+        "authenticationStrength": null
+    },
+    "sessionControls": null,
+    "templateId": null
+}
