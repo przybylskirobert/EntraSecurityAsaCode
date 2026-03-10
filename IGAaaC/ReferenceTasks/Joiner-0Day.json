@@ -1,0 +1,135 @@
+{
+    "displayName": "[displayName]",
+    "description": "[description]",
+    "category": "joiner",
+    "isEnabled": true,
+    "isSchedulingEnabled": false,
+    "executionConditions": {
+        "@odata.type": "microsoft.graph.identityGovernance.triggerAndScopeBasedConditions",
+        "scope": {
+            "@odata.type": "microsoft.graph.identityGovernance.ruleBasedSubjectSet",
+            "rule": "[rule]"
+        },
+        "trigger": {
+            "@odata.type": "microsoft.graph.identityGovernance.timeBasedAttributeTrigger",
+            "timeBasedAttribute": "[timeBasedAttribute]",
+            "offsetInDays": "[offsetInDays]"
+        }
+    },
+    "tasks": [
+        {
+            "isEnabled": true,
+            "taskDefinitionId": "1b555e50-7f65-41d5-b514-5894a026d10d",
+            "displayName": "Generate TAP And Send Email",
+            "description": "Generate Temporary Access Pass and send via email to user's manager",
+            "arguments": [
+                {
+                    "name": "tapLifetimeMinutes",
+                    "value": "480"
+                },
+                {
+                    "name": "tapIsUsableOnce",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "description": "Enable user account",
+            "displayName": "Enable User Account",
+            "isEnabled": true,
+            "continueOnError": true,
+            "taskDefinitionId": "6fc52c9d-398b-4305-9763-15f42c1676fc",
+            "arguments": [
+                {
+                    "name": "enableOnPremisesAccount",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "description": "Send welcome email to new hire",
+            "displayName": "Send Welcome Email",
+            "isEnabled": true,
+            "taskDefinitionId": "70b29d51-b59a-4773-9280-8841dfd3f2ea",
+            "arguments": [
+                {
+                    "name": "customSubject",
+                    "value": "Welcome to the organization - {{userDisplayName}}!"
+                },
+                {
+                    "name": "customBody",
+                    "value": "Welcome to our organization <b>{userGivenName}} {{userSurname}}</b>.\n\nFor more information, reach out to your manager '<b>{{managerDisplayName}}<\b> at <b>{{managerEmail}}</b>."
+                }
+            ]
+        },
+        {
+            "category": "joiner",
+            "description": "Send onboarding reminder email to user’s manager",
+            "displayName": "Send onboarding reminder email to manager",
+            "taskDefinitionId": "3C860712-2D37-42A4-928F-5C93935D26A1",
+            "isEnabled": true,
+            "arguments": [
+                {
+                    "name": "customSubject",
+                    "value": "Reminder: You have a new employee that starts today"
+                },
+                {
+                    "name": "customBody",
+                    "value": "Hello {{managerDisplayName}}\n\nWe are reaching out to let you know {{userDisplayName}} starts today in our organization.\n\nRegards\nYour IT department"
+                },
+                {
+                    "name": "to",
+                    "value": "Manager"
+                }
+            ]
+        },
+        {
+            "isEnabled": true,
+            "description": "Add user to selected groups",
+            "displayName": "Add user to groups - Nurse Unit",
+            "taskDefinitionId": "22085229-5809-45e8-97fd-270d28d66910",
+            "arguments": [
+                {
+                    "name": "groupID",
+                    "value": "88a4172b-27f9-4e74-b71a-4a8f7a494dba"
+                }
+            ]
+        },
+        {
+            "isEnabled": true,
+            "description": "Add user to selected groups",
+            "displayName": "Add user to groups - Licenses P2",
+            "taskDefinitionId": "22085229-5809-45e8-97fd-270d28d66910",
+            "arguments": [
+                {
+                    "name": "groupID",
+                    "value": "222a2d34-3b96-4165-86fd-d4cdf5e5002d"
+                }
+            ]
+        },
+        {
+            "isEnabled": true,
+            "description": "Add user to selected groups",
+            "displayName": "Add user to groups - Licenses Entra Suite",
+            "taskDefinitionId": "22085229-5809-45e8-97fd-270d28d66910",
+            "arguments": [
+                {
+                    "name": "groupID",
+                    "value": "0a911392-dba5-4458-bb89-c90b2d950deb"
+                }
+            ]
+        },
+        {
+            "isEnabled": true,
+            "description": "Add user to selected groups",
+            "displayName": "Add user to groups - Licenses Microsoft 365 E3 (no Teams)",
+            "taskDefinitionId": "22085229-5809-45e8-97fd-270d28d66910",
+            "arguments": [
+                {
+                    "name": "groupID",
+                    "value": "639267e0-fcf7-4c7d-8e1e-0eda40e4acf7"
+                }
+            ]
+        }
+    ]
+}

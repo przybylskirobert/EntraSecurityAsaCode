@@ -1,10 +1,31 @@
-[CmdletBinding()]
 param (
-    [Parameter(Mandatory = $false)]
-    [string] $JsonPath,
-    [Parameter(Mandatory = $false)]
-    [switch] $UsePrefix,
-    [Parameter(Mandatory = $false)]
+    [Parameter(Mandatory = $true)]
+    [string] $RoleName,
+
+    [ValidateSet("PT30M", "PT1H", "PT1H30M", "PT2H", "PT2H30M", "PT3H", "PT3H30M", "PT4H", "PT4H30M", "PT5H", "PT5H30M", "PT6H", "PT6H30M", "PT7H", "PT7H30M", "PT8H", "PT8H30M", "PT9H", "PT9H30M", "PT10H", "PT10H30M", "PT11H", "PT11H30M", "PT12H", "PT12H30M", "PT13H", "PT13H30M", "PT14H", "PT14H30M", "PT15H", "PT15H30M", "PT16H", "PT16H30M", "PT17H", "PT17H30M", "PT18H", "PT18H30M", "PT19H", "PT19H30M", "PT20H")]
+    [Parameter(Mandatory = $true)]
+    [string] $ActivationMaxDurationInHours,
+
+    [ValidateSet("P15D", "P30D", "P90D", "P180D", "P365D")]
+    [string] $ExpireEligibleAssignmentsAfterDays,
+
+    [ValidateSet("P15D", "P30D", "P90D", "P180D", "P365D")]
+    [string] $ExpireActiveAssignmentsAfterDays,
+
+    [switch] $RequireMFAOnActiveAssignement,
+
+    [switch] $RequireJustificationOnActiveAssignement, 
+
+    [switch] $RequireMFAOnActivation,
+
+    [switch] $RequireJustificationOnActivation,
+
+    [switch] $RequireTicketInfoOnActivation,
+
+    [switch] $RequireApprovalOnActivation,
+
+    [string] $Prefix,
+    
     [switch] $EnableLogs
 )
 try {
@@ -19,7 +40,23 @@ try {
         $logFilePath = Join-Path -Path $scriptDir -ChildPath $logFileName
         Start-Transcript -Path $logFilePath -NoClobber -UseMinimalHeader -Append -Force
     }
-    $message = $MyInvocation.MyCommand.Name
+    $output = @(
+        $(New-Object PSObject -Property @{
+                RoleName                                = $RoleName; 
+                ActivationMaxDurationInHours            = $ActivationMaxDurationInHours ; 
+                ExpireEligibleAssignmentsAfterDays      = $ExpireEligibleAssignmentsAfterDays; 
+                ExpireActiveAssignmentsAfterDays        = $ExpireActiveAssignmentsAfterDays; 
+                RequireMFAOnActiveAssignement           = $RequireMFAOnActiveAssignement;
+                RequireJustificationOnActiveAssignement = $RequireJustificationOnActiveAssignement; 
+                RequireMFAOnActivation                  = $RequireMFAOnActivation; 
+                RequireJustificationOnActivation        = $RequireJustificationOnActivation;
+                RequireTicketInfoOnActivation           = $RequireTicketInfoOnActivation; 
+                RequireApprovalOnActivation             = $RequireApprovalOnActivation;
+                Enabled                                 = $Enabled
+            }
+        )
+    )
+    $message = "[$($MyInvocation.MyCommand.Name)][Role: '$RoleName']: "
 
     if ($Prefix) {
         $customPrefix = "$Prefix - "
@@ -29,44 +66,65 @@ try {
     } 
 
     if (-not (Get-Module Microsoft.Graph.Identity.Governance)) {
+        Write-Host "[$message]: Importing Microsoft.Graph.Identity.Governance module..."
         Import-Module Microsoft.Graph.Identity.Governance -ErrorAction Stop
     }
 
     if (-not (Get-MgContext)) {
-        Connect-MgGraph -Scopes "RoleManagement.ReadWrite.Directory", "Directory.AccessAsUser.All, Group.ReadWrite.All" -NoWelcome
+        Write-Host "[$message]: Connecting to Microsoft Graph..."
+        Connect-MgGraph -Scopes "RoleManagement.ReadWrite.Directory", "Directory.AccessAsUser.All" -NoWelcome
     }
 
-    $json = Get-Content -Path $JsonPath -Raw | ConvertFrom-Json
-    $policy = $json.AssignmentPolicy
-    $roles = $json.PIMRoles
+    $roleID = (Get-MgRoleManagementDirectoryRoleDefinition | where-Object { $_.DisplayName -eq $RoleNAme }).Id
+    $policyRoleIDsArray = Get-MgPolicyRoleManagementPolicyAssignment -Filter "scopeId eq '/' and scopeType eq 'Directory'"
+    $policyRoleID = ($policyRoleIDsArray | where-Object { $_.RoleDefinitionId -eq $roleID }).PolicyId
 
-    $activationMaxDurationInHours = $policy.ActivationMaxDurationInHours
-    $expireEligibleAssignmentsAfterDays = $policy.ExpireEligibleAssignmentsAfterDays
-    $expireActiveAssignmentsAfterDays = $policy.ExpireActiveAssignmentsAfterDays
-    $requireMFAOnActiveAssignement = $policy.RequireMFAOnActiveAssignement
-    $requireJustificationOnActiveAssignement = $policy.RequireJustificationOnActiveAssignement
-    $requireMFAOnActivation = $policy.RequireMFAOnActivation
-    $requireJustificationOnActivation = $policy.RequireJustificationOnActivation
-    $requireApprovalOnActivation = $policy.RequireApprovalOnActivation
-    Write-Host "[$message]: " -nonewline
-    Write-Host "🚀 Starting configuration of PIM Roles" -ForegroundColor Cyan
+    $params = @{
+        "@odata.type"          = "#microsoft.graph.unifiedRoleManagementPolicyExpirationRule"
+        "id"                   = "Expiration_EndUser_Assignment"
+        "isExpirationRequired" = $true
+        "maximumDuration"      = $ActivationMaxDurationInHours
+        "target"               = @{
+            "caller"              = "EndUser"
+            "operations"          = @(
+                "all"
+            )
+            "level"               = "Assignment"
+            "inheritableSettings" = @()
+            "enforcedSettings"    = @()
+        }
+    }
+    Write-Host "$message Configuring 'Expiration_EndUser_Assignment' to '$ActivationMaxDurationInHours'" -ForegroundColor Cyan
+    Update-MgPolicyRoleManagementPolicyRule -UnifiedRoleManagementPolicyId $policyRoleID -UnifiedRoleManagementPolicyRuleId Expiration_EndUser_Assignment -BodyParameter $params | Out-Null
 
-    foreach ($role in $roles){
-        
-        Write-Host "[$message]:  " -nonewline
-        Write-Host "➕ Working on role '$role'" -ForegroundColor Green
-        $roleName = $role
-        $roleID = (Get-MgRoleManagementDirectoryRoleDefinition | where-Object { $_.DisplayName -eq $roleName }).Id
-        $policyRoleIDsArray = Get-MgPolicyRoleManagementPolicyAssignment -Filter "scopeId eq '/' and scopeType eq 'Directory'"
-        $policyRoleID = ($policyRoleIDsArray | where-Object { $_.RoleDefinitionId -eq $roleID }).PolicyId
-
+    if ($ExpireEligibleAssignmentsAfterDays ) {
         $params = @{
             "@odata.type"          = "#microsoft.graph.unifiedRoleManagementPolicyExpirationRule"
-            "id"                   = "Expiration_EndUser_Assignment"
+            "id"                   = "Expiration_Admin_Eligibility"
             "isExpirationRequired" = $true
-            "maximumDuration"      = $activationMaxDurationInHours
+            "maximumDuration"      = $ExpireEligibleAssignmentsAfterDays
             "target"               = @{
-                "caller"              = "EndUser"
+                "caller"              = "Admin"
+                "operations"          = @(
+                    "all"
+                )
+                "level"               = "Eligibility"
+                "inheritableSettings" = @()
+                "enforcedSettings"    = @()
+            }
+        }
+        Write-Host "$message Configuring 'Expiration_Admin_Eligibility' to '$ExpireEligibleAssignmentsAfterDays'" -ForegroundColor Cyan
+        Update-MgPolicyRoleManagementPolicyRule -UnifiedRoleManagementPolicyId $policyRoleID -UnifiedRoleManagementPolicyRuleId Expiration_Admin_Eligibility -BodyParameter $params | Out-Null
+    }
+
+    if ($ExpireActiveAssignmentsAfterDays ) {
+        $params = @{
+            "@odata.type"          = "#microsoft.graph.unifiedRoleManagementPolicyExpirationRule"
+            "id"                   = "Expiration_Admin_Assignment"
+            "isExpirationRequired" = $true
+            "maximumDuration"      = $ExpireActiveAssignmentsAfterDays
+            "target"               = @{
+                "caller"              = "Admin"
                 "operations"          = @(
                     "all"
                 )
@@ -75,247 +133,205 @@ try {
                 "enforcedSettings"    = @()
             }
         }
-        Write-Host "[$message]:    " -nonewline
-        Write-Host "➕ Configuring 'Expiration_EndUser_Assignment' to '$activationMaxDurationInHours'" -ForegroundColor Yellow
-        Update-MgPolicyRoleManagementPolicyRule -UnifiedRoleManagementPolicyId $policyRoleID -UnifiedRoleManagementPolicyRuleId Expiration_EndUser_Assignment -BodyParameter $params | Out-Null
-
-        if ($ExpireEligibleAssignmentsAfterDays ) {
-            $params = @{
-                "@odata.type"          = "#microsoft.graph.unifiedRoleManagementPolicyExpirationRule"
-                "id"                   = "Expiration_Admin_Eligibility"
-                "isExpirationRequired" = $true
-                "maximumDuration"      = $ExpireEligibleAssignmentsAfterDays
-                "target"               = @{
-                    "caller"              = "Admin"
-                    "operations"          = @(
-                        "all"
-                    )
-                    "level"               = "Eligibility"
-                    "inheritableSettings" = @()
-                    "enforcedSettings"    = @()
-                }
-            }
-            Write-Host "[$message]:    " -nonewline
-            Write-Host "➕ Configuring 'Expiration_Admin_Eligibility' to '$ExpireEligibleAssignmentsAfterDays'" -ForegroundColor Yellow
-            Update-MgPolicyRoleManagementPolicyRule -UnifiedRoleManagementPolicyId $policyRoleID -UnifiedRoleManagementPolicyRuleId Expiration_Admin_Eligibility -BodyParameter $params | Out-Null
-        }
-
-        if ($ExpireActiveAssignmentsAfterDays ) {
-            $params = @{
-                "@odata.type"          = "#microsoft.graph.unifiedRoleManagementPolicyExpirationRule"
-                "id"                   = "Expiration_Admin_Assignment"
-                "isExpirationRequired" = $true
-                "maximumDuration"      = $ExpireActiveAssignmentsAfterDays
-                "target"               = @{
-                    "caller"              = "Admin"
-                    "operations"          = @(
-                        "all"
-                    )
-                    "level"               = "Assignment"
-                    "inheritableSettings" = @()
-                    "enforcedSettings"    = @()
-                }
-            }
-            Write-Host "[$message]:    " -nonewline
-            Write-Host "➕ Configuring 'Expiration_Admin_Assignment' to '$ExpireActiveAssignmentsAfterDays'" -ForegroundColor Yellow
-            Update-MgPolicyRoleManagementPolicyRule -UnifiedRoleManagementPolicyId $policyRoleID -UnifiedRoleManagementPolicyRuleId Expiration_Admin_Assignment -BodyParameter $params  | Out-Null
-        }
-
-        $Enablement_Admin_Assignment = $null
-        if ($RequireMFAOnActiveAssignement -eq $true) {
-            $Enablement_Admin_Assignment = "MultiFactorAuthentication"
-        }
-
-        if ($RequireJustificationOnActiveAssignement -eq $true) {
-            if ($null -eq $Enablement_Admin_Assignment) {
-                $Enablement_Admin_Assignment = "Justification"
-            }
-            if ($Enablement_Admin_Assignment -eq "MultiFactorAuthentication") {
-                $Enablement_Admin_Assignment = $Enablement_Admin_Assignment + "," + "Justification"
-                $Enablement_Admin_Assignment = [system.array]($Enablement_Admin_Assignment -split ",")
-            }
-        }
-
-        if ($Enablement_Admin_Assignment) {
-            $params = @{
-                "@odata.type"  = "#microsoft.graph.unifiedRoleManagementPolicyEnablementRule"
-                "id"           = "Enablement_Admin_Assignment"
-                "enabledRules" = @($Enablement_Admin_Assignment)
-                "target"       = @{
-                    "caller"              = "Admin"
-                    "operations"          = @(
-                        "all"
-                    )
-                    "level"               = "Assignment"
-                    "inheritableSettings" = @()
-                    "enforcedSettings"    = @()
-                }
-            }
-            Write-Host "[$message]:    " -nonewline
-            Write-Host "➕ Configuring 'Enablement_Admin_Assignment' to '$Enablement_Admin_Assignment'" -ForegroundColor Yellow
-            Update-MgPolicyRoleManagementPolicyRule -UnifiedRoleManagementPolicyId $policyRoleID -UnifiedRoleManagementPolicyRuleId Enablement_Admin_Assignment -BodyParameter $params | Out-Null
-        }
-
-        $Enablement_EndUser_Assignment = @()
-        if ($RequireMFAOnActivation -eq $true) {
-            $Enablement_EndUser_Assignment += "MultiFactorAuthentication"
-        }
-
-        if ($RequireJustificationOnActivation -eq $true) {
-            $Enablement_EndUser_Assignment += "Justification"
-        }
-
-        if ($RequireTicketInfoOnActivation -eq $true) {
-            $Enablement_EndUser_Assignment += "Ticketing"
-        }
-
-        $Enablement_EndUser_Assignment = $Enablement_EndUser_Assignment | Select-Object -Unique
-        $Enablement_EndUser_Assignment = [Object[]]$Enablement_EndUser_Assignment
-
-        if ($Enablement_EndUser_Assignment) {
-            $params = @{            "@odata.type" = "#microsoft.graph.unifiedRoleManagementPolicyEnablementRule"
-                "id"                              = "Enablement_EndUser_Assignment"
-                "enabledRules"                    = @($Enablement_EndUser_Assignment)
-                "target"                          = @{
-                    "caller"              = "Admin"
-                    "operations"          = @(
-                        "all"
-                    )
-                    "level"               = "Assignment"
-                    "inheritableSettings" = @()
-                    "enforcedSettings"    = @()
-                }
-            }
-            Write-Host "[$message]:    " -nonewline
-            Write-Host "➕ Configuring 'Enablement_EndUser_Assignment' to '$Enablement_EndUser_Assignment'" -ForegroundColor Yellow
-            Update-MgPolicyRoleManagementPolicyRule -UnifiedRoleManagementPolicyId $policyRoleID -UnifiedRoleManagementPolicyRuleId Enablement_EndUser_Assignment -BodyParameter $params | out-null
-        }
-
-if ($RequireApprovalOnActivation) {
-    $pimApproversGroupName = $customPrefix + "PIM $roleName - Approvers"
-    $groupDescription = "Group with approvers for role '$roleName' in PIM"
-    Write-Host "[$message]:    " -NoNewline
-    Write-Host "➕ Configuring role approvers to '$pimApproversGroupName'" -ForegroundColor Yellow
-
-    try {
-        Write-Host "[$message]:      " -NoNewline
-        Write-Host "🔍 Checking if the group '$pimApproversGroupName' exists in Microsoft Entra ID." -ForegroundColor Gray
-        $approversGroup = Get-MgGroup -Filter "displayName eq '$pimApproversGroupName'" -ErrorAction SilentlyContinue
-
-        if ($approversGroup) {
-            Write-Host "[$message]:        " -NoNewline
-            Write-Host "ℹ️  Group '$pimApproversGroupName' already exists." -ForegroundColor Gray
-        } else {
-            Write-Host "[$message]:        " -NoNewline
-            Write-Host "➕ Creating group '$pimApproversGroupName'." -ForegroundColor Gray
-            $approversGroup = New-MgGroup -DisplayName $pimApproversGroupName -MailEnabled:$false -MailNickname $pimApproversGroupName.Replace(" ", "") -SecurityEnabled:$true -Description $groupDescription
-            Write-Host "[$message]:        " -NoNewline
-            Write-Host "✅ Group '$pimApproversGroupName' created." -ForegroundColor Yellow
-        }
-
-        $approvalRule = Get-MgPolicyRoleManagementPolicyRule -UnifiedRoleManagementPolicyId $policyRoleID -UnifiedRoleManagementPolicyRuleId "Approval_EndUser_Assignment" #-ErrorAction SilentlyContinue
-        $alreadyApprover = $approvalRule.AdditionalProperties.setting.approvalStages.primaryApprovers.groupId -contains $approversGroup.Id
-        if ($alreadyApprover) {
-            Write-Host "[$message]:        " -NoNewline
-            Write-Host "ℹ️  Group '$pimApproversGroupName' is already set as approver. Skipping." -ForegroundColor Gray
-        } else {
-            $params = @{
-                "@odata.type" = "#microsoft.graph.unifiedRoleManagementPolicyApprovalRule"
-                "id"          = "Approval_EndUser_Assignment"
-                "target"      = @{
-                    "caller"              = "EndUser"
-                    "operations"          = @("all")
-                    "level"               = "Assignment"
-                    "inheritableSettings" = @()
-                    "enforcedSettings"    = @()
-                }
-                "setting"     = @{
-                    "isApprovalRequired"               = $true
-                    "isApprovalRequiredForExtension"   = $false
-                    "isRequestorJustificationRequired" = $true
-                    "approvalMode"                     = "SingleStage"
-                    "approvalStages"                   = @(
-                        @{
-                            "approvalStageTimeOutInDays"      = 1
-                            "isApproverJustificationRequired" = $true
-                            "escalationTimeInMinutes"         = 0
-                            "isEscalationEnabled"             = $false
-                            "primaryApprovers"                = @(
-                                @{
-                                    "@odata.type" = "#microsoft.graph.groupMembers"
-                                    "groupID"     = $approversGroup.Id
-                                    "description" = $groupDescription 
-                                }
-                            )
-                            "escalationApprovers"             = @()
-                        }
-                    )
-                }
-            }
-            Write-Host "[$message]:        " -NoNewline
-            Write-Host "➕ Group '$pimApproversGroupName' set as approver." -ForegroundColor Yellow
-            Update-MgPolicyRoleManagementPolicyRule -UnifiedRoleManagementPolicyId $policyRoleID -UnifiedRoleManagementPolicyRuleId "Approval_EndUser_Assignment" -BodyParameter $params | Out-Null
-        }
-        Write-Host "[$message]:      " -NoNewline
-        Write-Host "✅ Approver setup completed." -ForegroundColor Yellow
-    }
-    catch {
-        Write-Host "[$message]:        " -NoNewline
-        Write-Host "❌ Error checking/assigning approvers: $_" -ForegroundColor Red
+        Write-Host "$message Configuring 'Expiration_Admin_Assignment' to '$ExpireActiveAssignmentsAfterDays'" -ForegroundColor Cyan
+        Update-MgPolicyRoleManagementPolicyRule -UnifiedRoleManagementPolicyId $policyRoleID -UnifiedRoleManagementPolicyRuleId Expiration_Admin_Assignment -BodyParameter $params  | Out-Null
     }
 
-    $pimEligibleGroupName = $customPrefix + "PIM $roleName - Eligible"
-    $eligibleGroupDescription = "Group eligible for '$roleName' in PIM requests."
-    Write-Host "[$message]:    " -NoNewline
-    Write-Host "➕ Configuring role eligibility for '$pimEligibleGroupName'" -ForegroundColor Yellow
+    $Enablement_Admin_Assignment = $null
+    if ($RequireMFAOnActiveAssignement -eq $true) {
+        $Enablement_Admin_Assignment = "MultiFactorAuthentication"
+    }
 
-    try {
-        Write-Host "[$message]:      " -NoNewline
-        Write-Host "🔍 Checking if group '$pimEligibleGroupName' exists." -ForegroundColor Gray
-        $eligibleGroup = Get-MgGroup -Filter "displayName eq '$pimEligibleGroupName'" -ErrorAction SilentlyContinue
-
-        if ($eligibleGroup) {
-            Write-Host "[$message]:        " -NoNewline
-            Write-Host "ℹ️  Group '$pimEligibleGroupName' already exists." -ForegroundColor Gray
-        } else {
-            $eligibleGroup = New-MgGroup -DisplayName $pimEligibleGroupName -MailEnabled:$false -MailNickname $pimEligibleGroupName.Replace(" ", "") -SecurityEnabled:$true -Description $eligibleGroupDescription -IsAssignableToRole:$true
-            Write-Host "[$message]:        " -NoNewline
-            Write-Host "✅ Group '$pimEligibleGroupName' created." -ForegroundColor Yellow
+    if ($RequireJustificationOnActiveAssignement -eq $true) {
+        if ($null -eq $Enablement_Admin_Assignment) {
+            $Enablement_Admin_Assignment = "Justification"
         }
-        $existingEligibility = Get-MgRoleManagementDirectoryRoleEligibilityScheduleRequest -Filter "principalId eq '$($eligibleGroup.Id)' and roleDefinitionId eq '$roleId'" -ErrorAction SilentlyContinue
-        if (($existingEligibility).count -ge 1) {
-            Write-Host "[$message]:        " -NoNewline
-            Write-Host "ℹ️  Group '$pimEligibleGroupName' is already assigned as eligible. Skipping." -ForegroundColor Gray
-        } else {
-            $params = @{
-                "PrincipalId"      = "$($eligibleGroup.Id)"
-                "RoleDefinitionId" = "$roleid"
-                "Justification"    = "Add eligible assignment"
-                "DirectoryScopeId" = "/"
-                "Action"           = "AdminAssign"
-                "ScheduleInfo"     = @{
-                    "StartDateTime" = (Get-Date)
-                    "Expiration"    = @{
-                        "Type"     = "AfterDuration"
-                        "Duration" = "P180D"
+        if ($Enablement_Admin_Assignment -eq "MultiFactorAuthentication") {
+            $Enablement_Admin_Assignment = $Enablement_Admin_Assignment + "," + "Justification"
+            $Enablement_Admin_Assignment = [system.array]($Enablement_Admin_Assignment -split ",")
+        }
+    }
+
+    if ($Enablement_Admin_Assignment) {
+        $params = @{
+            "@odata.type"  = "#microsoft.graph.unifiedRoleManagementPolicyEnablementRule"
+            "id"           = "Enablement_Admin_Assignment"
+            "enabledRules" = @($Enablement_Admin_Assignment)
+            "target"       = @{
+                "caller"              = "Admin"
+                "operations"          = @(
+                    "all"
+                )
+                "level"               = "Assignment"
+                "inheritableSettings" = @()
+                "enforcedSettings"    = @()
+            }
+        }
+        Write-Host "$message Configuring 'Enablement_Admin_Assignment' to '$Enablement_Admin_Assignment'" -ForegroundColor Cyan
+        Update-MgPolicyRoleManagementPolicyRule -UnifiedRoleManagementPolicyId $policyRoleID -UnifiedRoleManagementPolicyRuleId Enablement_Admin_Assignment -BodyParameter $params | Out-Null
+    }
+
+    $Enablement_EndUser_Assignment = @()
+    if ($RequireMFAOnActivation -eq $true) {
+        $Enablement_EndUser_Assignment += "MultiFactorAuthentication"
+    }
+
+    if ($RequireJustificationOnActivation -eq $true) {
+        $Enablement_EndUser_Assignment += "Justification"
+    }
+
+    if ($RequireTicketInfoOnActivation -eq $true) {
+        $Enablement_EndUser_Assignment += "Ticketing"
+    }
+
+    $Enablement_EndUser_Assignment = $Enablement_EndUser_Assignment | Select-Object -Unique
+    $Enablement_EndUser_Assignment = [Object[]]$Enablement_EndUser_Assignment
+
+    if ($Enablement_EndUser_Assignment) {
+        $params = @{            "@odata.type" = "#microsoft.graph.unifiedRoleManagementPolicyEnablementRule"
+            "id"                              = "Enablement_EndUser_Assignment"
+            "enabledRules"                    = @($Enablement_EndUser_Assignment)
+            "target"                          = @{
+                "caller"              = "Admin"
+                "operations"          = @(
+                    "all"
+                )
+                "level"               = "Assignment"
+                "inheritableSettings" = @()
+                "enforcedSettings"    = @()
+            }
+        }
+        Write-Host "$message Configuring 'Enablement_EndUser_Assignment' to '$Enablement_EndUser_Assignment'" -ForegroundColor Cyan
+        Update-MgPolicyRoleManagementPolicyRule -UnifiedRoleManagementPolicyId $policyRoleID -UnifiedRoleManagementPolicyRuleId Enablement_EndUser_Assignment -BodyParameter $params | out-null
+    }
+
+    if ($RequireApprovalOnActivation) {
+        $pimApproversGroupName = $customPrefix + "PIM $RoleName - Approvers"
+        $groupDescription = "Group with approvers for role '$RoleName' in PIM"
+        if (-not (Get-Module -ListAvailable -Name Microsoft.Graph)) {
+            throw "$message The Microsoft Graph PowerShell module is not installed. Install it using 'Install-Module -Name Microsoft.Graph'."
+        }
+        try {
+            if (-not (Get-MgContext)) {
+                Write-Host "Connecting to Microsoft Graph..." -ForegroundColor Yellow
+                Connect-MgGraph -Scopes "Group.ReadWrite.All"
+            }
+        }
+        catch {
+            throw "$message Unable to connect to Microsoft Graph. Ensure you have the required permissions."
+        }
+
+        try {
+            Write-Host "$message Checking if the group '$pimApproversGroupName' exists in Microsoft Entra ID..." -ForegroundColor Cyan
+            $existingGroup = Get-MgGroup -Filter "displayName eq '$pimApproversGroupName'" -ErrorAction SilentlyContinue
+
+            if ($null -ne $existingGroup) {
+                Write-Host "$message Group '$pimApproversGroupName' already exists in Microsoft Entra ID." -ForegroundColor Cyan
+                $groupID = $existingGroup.ID
+            }
+            else {
+                Write-Host "$message Group '$pimApproversGroupName' does not exist. Creating a new group..." -ForegroundColor Cyan
+                $group = New-MgGroup -DisplayName $pimApproversGroupName -MailEnabled:$false -MailNickname $pimApproversGroupName.Replace(" ", "") -SecurityEnabled:$true -Description $groupDescription
+                $groupID = $group.ID
+                Write-Host "$message Group '$pimApproversGroupName' created successfully with the description: '$groupDescription'." -ForegroundColor Cyan
+            }
+        }
+        catch {
+            Write-Host "$message An error occurred: $_" -ForegroundColor Red
+        }
+
+        $params = @{
+            "@odata.type" = "#microsoft.graph.unifiedRoleManagementPolicyApprovalRule"
+            "id"          = "Approval_EndUser_Assignment"
+            "target"      = @{
+                "caller"              = "EndUser"
+                "operations"          = @(
+                    "all"
+                )
+                "level"               = "Assignment"
+                "inheritableSettings" = @()
+                "enforcedSettings"    = @()
+            }
+            "setting"     = @{
+                "isApprovalRequired"               = $true
+                "isApprovalRequiredForExtension"   = $false
+                "isRequestorJustificationRequired" = $true
+                "approvalMode"                     = "SingleStage"
+                "approvalStages"                   = @(
+                    @{
+                        "approvalStageTimeOutInDays"      = 1
+                        "isApproverJustificationRequired" = $true
+                        "escalationTimeInMinutes"         = 0
+                        "isEscalationEnabled"             = $false
+                        "primaryApprovers"                = @(
+                            @{
+                                "@odata.type" = "#microsoft.graph.groupMembers"
+                                "groupID"     = $groupID
+                                "description" = $groupDescription 
+                            }
+                        )
+                        "escalationApprovers"             = @()
                     }
+                )
+            }
+        }
+        Write-Host "$message Configuring 'Approval_EndUser_Assignment' to '$pimApproversGroupName'" -ForegroundColor Cyan
+        Update-MgPolicyRoleManagementPolicyRule -UnifiedRoleManagementPolicyId $policyRoleID -UnifiedRoleManagementPolicyRuleId Approval_EndUser_Assignment -BodyParameter $params | Out-Null
+
+        $pimEligibleGroupName = $customPrefix + "PIM $RoleName - Eligible"
+        $pimEligiblegroupDescription = "Group eligible for '$RoleName' in PIM requests."
+        if (-not (Get-Module -ListAvailable -Name Microsoft.Graph)) {
+            throw "$message The Microsoft Graph PowerShell module is not installed. Install it using 'Install-Module -Name Microsoft.Graph'."
+        }
+        try {
+            if (-not (Get-MgContext)) {
+                Write-Host "Connecting to Microsoft Graph..." -ForegroundColor Yellow
+                Connect-MgGraph -Scopes "Group.ReadWrite.All"
+            }
+        }
+        catch {
+            throw "$message Unable to connect to Microsoft Graph. Ensure you have the required permissions."
+        }
+    
+        try {
+            Write-Host "$message Checking if the group '$pimEligibleGroupName' exists in Microsoft Entra ID..." -ForegroundColor Cyan
+            $existingGroup = Get-MgGroup -Filter "displayName eq '$pimEligibleGroupName'" -ErrorAction SilentlyContinue
+    
+            if ($null -ne $existingGroup) {
+                Write-Host "$message Group '$pimEligibleGroupName' already exists in Microsoft Entra ID." -ForegroundColor Cyan
+                $groupID = $existingGroup.ID
+            }
+            else {
+                Write-Host "$message Group '$pimEligibleGroupName' does not exist. Creating a new group..." -ForegroundColor Cyan
+                $group = New-MgGroup -DisplayName $pimEligibleGroupName -MailEnabled:$false -MailNickname $pimApproversGroupName.Replace(" ", "") -SecurityEnabled:$true -Description $groupDescription -IsAssignableToRole:$true
+                $groupID = $group.ID
+                Write-Host "$message Group '$pimEligibleGroupName' created successfully with the description: '$groupDescription'." -ForegroundColor Cyan
+            }
+        }
+        catch {
+            Write-Host "$message An error occurred: $_" -ForegroundColor Red
+        }
+
+        $params = @{
+            "PrincipalId"      = "$groupID"
+            "RoleDefinitionId" = "$roleid"
+            "Justification"    = "Add eligible assignment"
+            "DirectoryScopeId" = "/"
+            "Action"           = "AdminAssign"
+            "ScheduleInfo"     = @{
+                "StartDateTime" = Get-Date
+                "Expiration"    = @{
+                    "Type"     = "AfterDuration"
+                    "Duration" = "P180D"
                 }
             }
-            New-MgRoleManagementDirectoryRoleEligibilityScheduleRequest -BodyParameter $params | Out-Null
         }
-        Write-Host "[$message]:      " -NoNewline
-        Write-Host "✅ Eligibility setup completed." -ForegroundColor Yellow
-    }
-    catch {
-            Write-Host "[$message]:        " -NoNewline
-            Write-Host "❌ Error in eligible group assignment: $_" -ForegroundColor Red
-    }
-}
+        Write-Host "$message Configuring role elibibility for '$pimEligibleGroupName'" -ForegroundColor Cyan
+        New-MgRoleManagementDirectoryRoleEligibilityScheduleRequest -BodyParameter $params | out-null
     }
 
-    Write-Host "[$message]: " -nonewline
-    Write-Host "🏁  Configuration Completed." -ForegroundColor Cyan
-
+    $output
+    Write-Host "$message Configuration Completed." -ForegroundColor Green
     if ($EnableLogs) {
         Stop-Transcript
     }

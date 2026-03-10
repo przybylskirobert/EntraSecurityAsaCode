@@ -1,23 +1,31 @@
 <#
     .EXAMPLE
-        Set-EntraIDELMSettings.ps1 -JsonPath "C:\path\to\settings.json" -EnableLogs
+        Set-EntraIDELMSettings.ps1 -externalUserLifecycleAction blockSignInAndDelete -DurationUntilExternalUserDeletedAfterBlocked 25 -EnableLogs
+    .EXAMPLE
+        Set-EntraIDELMSettings.ps1 -externalUserLifecycleAction blockSignInAndDelete -DurationUntilExternalUserDeletedAfterBlocked 25
+    .EXAMPLE
+        Set-EntraIDELMSettings.ps1 -externalUserLifecycleAction none -DurationUntilExternalUserDeletedAfterBlocked 25 -EnableLogs
+    .EXAMPLE
+        Set-EntraIDELMSettings.ps1 -externalUserLifecycleAction blockSignIn -DurationUntilExternalUserDeletedAfterBlocked 25 -EnableLogs
+
 #>
 
 param (
     [Parameter(Mandatory = $true)]
-    [string]$JsonPath,
+    [ValidateSet("none", "blockSignIn", "blockSignInAndDelete")]    
+    [string]$ExternalUserLifecycleAction,
 
     [Parameter(Mandatory = $false)]
-    [switch]$EnableLogs
-)
+    [string]$DurationUntilExternalUserDeletedAfterBlocked,
 
+    [Parameter(Mandatory = $false)]    
+    [switch] $EnableLogs
+)
 try {
     if ($EnableLogs) {
         $scriptPath = $MyInvocation.MyCommand.Path
-        $scriptDir = Join-Path -Path (Split-Path -Path $scriptPath) -ChildPath "Logs"
-        if (-not (Test-Path $scriptDir)) {
-            New-Item -ItemType Directory -Path $scriptDir | Out-Null
-        }
+        $scriptDir = Split-Path -Path $scriptPath
+        $scriptDir = $scriptDir + "/Logs"
         $scriptName = [System.IO.Path]::GetFileNameWithoutExtension($scriptPath)
         $dateTime = (Get-Date).ToString("yyyy_MM-dd HH_mm_ss")
         $logFileName = "$scriptName`_$dateTime.log"
@@ -25,60 +33,15 @@ try {
         Start-Transcript -Path $logFilePath -NoClobber -UseMinimalHeader -Append -Force
     }
 
-    $message = $MyInvocation.MyCommand.Name
-    Write-Host "[$message]: " -NoNewline
-    Write-Host "🚀 Starting Entitlement Management settings setup." -ForegroundColor Cyan
-
-    if (-not (Test-Path $JsonPath)) {
-        Write-Host "[$message]:  " -NoNewline
-        Write-Host "❌ JSON file not found at path: $JsonPath" -ForegroundColor Red
-        return
-    }
-
-    $jsonContent = Get-Content $JsonPath -Raw | ConvertFrom-Json
-
-    if (-not $jsonContent.Settings -or $jsonContent.Settings.Count -eq 0) {
-        Write-Host "[$message]:  " -NoNewline
-        Write-Host "⚠️ No 'Settings' section found in the JSON file." -ForegroundColor Yellow
-        return
-    }
-
-    $settings = $jsonContent.Settings[0]
-
-    $externalUserLifecycleAction = $settings.externalUserLifecycleAction
-    $duration = $settings.durationUntilExternalUserDeletedAfterBlocked
-
-    if (-not $externalUserLifecycleAction) {
-        Write-Host "[$message]:  " -NoNewline
-        Write-Host "⚠️ Missing 'externalUserLifecycleAction' in Settings." -ForegroundColor Yellow
-        return
-    }
-
-    if ($externalUserLifecycleAction -eq 'blockSignInAndDelete' -and (-not $duration)) {
-        Write-Host "[$message]:  " -NoNewline
-        Write-Host "⚠️ Duration must be set when action is 'blockSignInAndDelete'." -ForegroundColor Yellow
-        return
-    }
-
-    switch ($externalUserLifecycleAction) {
-        'none'         { $duration = 0 }
-        'blockSignIn'  { $duration = 0 }
-        'blockSignInAndDelete' {
-            if (-not ($duration -as [int])) {
-                Write-Host "[$message]:  " -NoNewline
-                Write-Host "⚠️ Invalid duration value: '$duration'. It must be an integer." -ForegroundColor Yellow
-                return
+    $output = @(
+        $(New-Object PSObject -Property @{
+                ExternalUserLifecycleAction                  = $ExternalUserLifecycleAction; 
+                DurationUntilExternalUserDeletedAfterBlocked = $DurationUntilExternalUserDeletedAfterBlocked ; 
+                EnableLogs                                   = $EnableLogs
             }
-        }
-        default {
-            Write-Host "[$message]:  " -NoNewline
-            Write-Host "⚠️ Unsupported value for externalUserLifecycleAction: '$externalUserLifecycleAction'" -ForegroundColor Yellow
-            return
-        }
-    }
-
-    $timespan = [System.TimeSpan]::FromDays([int]$duration)
-
+        )
+    )
+    $message = "[$($MyInvocation.MyCommand.Name)]: "
     if (-not (Get-Module -Name Microsoft.Graph.Identity.Governance)) {
         Import-Module Microsoft.Graph.Identity.Governance
     }
@@ -86,23 +49,36 @@ try {
         Connect-MgGraph -Scopes "EntitlementManagement.ReadWrite.All" -NoWelcome
     }
 
-    Write-Host "[$message]:  " -NoNewline
-    Write-Host "➕ Setting 'externalUserLifecycleAction' to '$externalUserLifecycleAction'" -ForegroundColor Gray
-    Write-Host "[$message]:  " -NoNewline
-    Write-Host "➕ Setting 'durationUntilExternalUserDeletedAfterBlocked' to '$duration'" -ForegroundColor Gray
+    switch ($ExternalUserLifecycleAction) {
+        'blockSignInAndDelete' {
+            if (-not $DurationUntilExternalUserDeletedAfterBlocked) {
+                throw "$message When ExternalUserLifecycleAction is 'blockSignInAndDelete', you must provide a valid DurationUntilExternalUserDeletedAfterBlocked."
+            }
+        }
+        'none' {
+            $DurationUntilExternalUserDeletedAfterBlocked = '0'
+        }
+        'blockSignIn' {
+            $DurationUntilExternalUserDeletedAfterBlocked = '0'
+        }
+    }
+    $timespan = [System.TimeSpan]::FromDays($DurationUntilExternalUserDeletedAfterBlocked)
 
-    Update-MgEntitlementManagementSetting -ExternalUserLifecycleAction $externalUserLifecycleAction -DurationUntilExternalUserDeletedAfterBlocked $timespan | Out-Null
-
-    Write-Host "[$message]: " -NoNewline
-    Write-Host "🏁 Entitlement Management settings updated successfully." -ForegroundColor Green
+    try {
+        Write-Host "$message Configuring Block external user from signing in to this directory to '$ExternalUserLifecycleAction' " -ForegroundColor Cyan
+        Write-Host "$message Configuring Number of days before removing external user from this directory to '$DurationUntilExternalUserDeletedAfterBlocked' " -ForegroundColor Cyan
+        Update-MgEntitlementManagementSetting -ExternalUserLifecycleAction $ExternalUserLifecycleAction -DurationUntilExternalUserDeletedAfterBlocked $timespan |Out-Null
+        Write-Host "$message Entitlement Management settings updated successfully." -ForegroundColor Green
+        $OUTPUT
+    }
+    catch {
+        Write-Error "$message Failed to configure Entitlement Management settings: $_"
+    }
 
     if ($EnableLogs) {
         Stop-Transcript
     }
 }
 catch {
-    Write-Error "$message $_"
-    if ($EnableLogs) {
-        Stop-Transcript
-    }
+    Write-Error $_
 }

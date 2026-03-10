@@ -1,0 +1,30 @@
+
+$jsonPath = "./JSON/IGA_workshop.json"
+$config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
+
+foreach ($LCWSetup in $config.LifecycleWorkflowsSetup){
+    ./New-EntraIDLCWSetup.ps1 `
+	-WorkflowScheduleIntervalInHours $LCWSetup.WorkflowScheduleIntervalInHours `
+	-SenderDomain $LCWSetup.SenderDomain `
+	-UseCompanyBranding $LCWSetup.UseCompanyBranding`
+	-EnableLogs
+}
+
+foreach ($LCWConfig in $config.LifecycleWorkflowsConfig){
+    ./New-EntraIDLCWConfig.ps1 `
+	-DisplayName $LCWConfig.DisplayName `
+	-Rule $LCWConfig.Rule `
+	-TimeBasedAttribute $LCWConfig.TimeBasedAttribute `
+	-OffsetInDays $LCWConfig.OffsetInDays `
+	-Template $LCWConfig.Template `
+	-WhatIF $LCWConfig.WhatIF `
+	-EnableLogs
+}
+
+foreach ($LCWRun in $config.LifecycleWorkflowsRun){
+    ./New-EntraIDLCWRun.ps1 `
+	-WorkflowName $LCWRun.WorkflowName `
+	-IncludedSubjects $LCWRun.IncludedSubjects `
+	-WhatIF $LCWRun.WhatIF `
+	-EnableLogs
+}

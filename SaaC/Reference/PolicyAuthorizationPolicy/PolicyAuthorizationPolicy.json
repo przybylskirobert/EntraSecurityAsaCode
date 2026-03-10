@@ -5,7 +5,7 @@
   "AllowInvitesFrom": "adminsAndGuestInviters",
   "AllowUserConsentForRiskyApps": false,
   "AllowedToSignUpEmailBasedSubscriptions": false,
-  "AllowedToUseSspr": false,
+  "AllowedToUseSspr": true,
   "BlockMsolPowerShell": true,
   "DefaultUserRolePermissions": {
     "AllowedToCreateTenants": false,

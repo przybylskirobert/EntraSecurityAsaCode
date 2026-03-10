@@ -1,9 +1,0 @@
-{
-  "notifyReviewers": false,
-  "remindersEnabled": false,
-  "version": 0,
-  "isEnabled": true,
-  "reviewers": [],
-  "requestDurationInDays": 0,
-  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#policies/adminConsentRequestPolicy/$entity"
-}

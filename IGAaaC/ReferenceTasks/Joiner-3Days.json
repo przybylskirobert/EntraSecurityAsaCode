@@ -1,0 +1,63 @@
+{
+    "displayName": "[displayName]",
+    "description": "[description]",
+    "category": "joiner",
+    "isEnabled": true,
+    "isSchedulingEnabled": false,
+    "executionConditions": {
+        "@odata.type": "microsoft.graph.identityGovernance.triggerAndScopeBasedConditions",
+        "scope": {
+            "@odata.type": "microsoft.graph.identityGovernance.ruleBasedSubjectSet",
+            "rule": "[rule]"
+        },
+        "trigger": {
+            "@odata.type": "microsoft.graph.identityGovernance.timeBasedAttributeTrigger",
+            "timeBasedAttribute": "[timeBasedAttribute]",
+            "offsetInDays": "[offsetInDays]"
+        }
+    },
+    "tasks": [
+        {
+            "category": "joiner",
+            "description": "Send onboarding reminder email to user’s manager",
+            "displayName": "Send onboarding reminder email to user",
+            "taskDefinitionId": "3C860712-2D37-42A4-928F-5C93935D26A1",
+            "isEnabled": true,
+            "arguments": [
+                {
+                    "name": "customSubject",
+                    "value": "Reminder: We are happy that you are joining us soon"
+                },
+                {
+                    "name": "customBody",
+                    "value": "Hello {{userDisplayName}}\n\nThis is a reminder thatyou are starting soon.\n\nPlease reach out to your manager '{{managerDisplayName}}' for Temporary Access Pass\n\nRegards\nYour IT department"
+                },
+                {
+                    "name": "to",
+                    "value": "User/otherMails"
+                }
+            ]
+        },
+        {
+            "category": "joiner",
+            "description": "Send onboarding reminder email to user’s manager",
+            "displayName": "Send onboarding reminder email to manager",
+            "taskDefinitionId": "3C860712-2D37-42A4-928F-5C93935D26A1",
+            "isEnabled": true,
+            "arguments": [
+                {
+                    "name": "customSubject",
+                    "value": "Reminder: '{{userDisplayName}}' is starting soon"
+                },
+                {
+                    "name": "customBody",
+                    "value": "Hello {{managerDisplayName}}\n\nthis is a reminder that '{{userDisplayName}}' is starting soon.\n\nRegards\nYour IT department"
+                },
+                {
+                    "name": "to",
+                    "value": "Manager"
+                }
+            ]
+        }
+    ]
+}

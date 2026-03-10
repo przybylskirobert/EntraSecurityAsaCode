@@ -1,0 +1,1110 @@
+{
+  "Prefix": "Formula5 POC",
+  "PIMRoles": [
+    {
+      "RoleName": "AI Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": false,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Application Developer",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Attack Payload Author",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Attack Simulation Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Attribute Assignment Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Attribute Definition Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Attribute Log Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Attribute Provisioning Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Authentication Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Authentication Extensibility Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Azure AD Joined Device Local Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Azure DevOps Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Azure Information Protection Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "B2C IEF Keyset Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "B2C IEF Policy Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Billing Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Cloud App Security Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Cloud Device Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Conditional Access Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Customer LockBox Access Approver",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Desktop Analytics Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Directory Synchronization Accounts",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Directory Writers",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Domain Name Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Dynamics 365 Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Dynamics 365 Business Central Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Edge Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Exchange Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Exchange Recipient Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Extended Directory User Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "External ID User Flow Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "External ID User Flow Attribute Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "External Identity Provider Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Fabric Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Global Secure Access Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Groups Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Guest Inviter",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Helpdesk Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Identity Governance Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Insights Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Insights Analyst",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Insights Business Leader",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Intune Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Kaizala Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Knowledge Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Knowledge Manager",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "License Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Lifecycle Workflows Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Microsoft 365 Backup Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Microsoft 365 Migration Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Microsoft Hardware Warranty Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Microsoft Hardware Warranty Specialist",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Network Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Office Apps Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "On Premises Directory Sync Account",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Organizational Branding Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Organizational Messages Approver",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Organizational Messages Writer",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Password Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Permissions Management Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Power Platform Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Printer Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Printer Technician",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Search Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Search Editor",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Security Operator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Service Support Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "SharePoint Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "SharePoint Embedded Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Skype for Business Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Teams Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Teams Communications Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Teams Communications Support Engineer",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Teams Communications Support Specialist",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Teams Devices Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Teams Telephony Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Tenant Creator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "User Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "User Experience Success Manager",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Virtual Visits Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Viva Goals Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Viva Pulse Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Windows 365 Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Windows Update Deployment Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    },
+    {
+      "RoleName": "Yammer Administrator",
+      "AssignmentPolicy": {
+        "ActivationMaxDurationInHours": "PT4H",
+        "ExpireEligibleAssignmentsAfterDays": "P180D",
+        "ExpireActiveAssignmentsAfterDays": "P180D",
+        "RequireMFAOnActiveAssignement": false,
+        "RequireJustificationOnActiveAssignement": false,
+        "RequireMFAOnActivation": true,
+        "RequireJustificationOnActivation": true,
+        "RequireApprovalOnActivation": true
+      }
+    }
+  ]
+}

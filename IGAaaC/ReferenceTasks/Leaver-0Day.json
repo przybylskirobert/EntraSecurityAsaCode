@@ -1,0 +1,88 @@
+{
+    "displayName": "[displayName]",
+    "description": "[description]",
+    "category": "leaver",
+    "isEnabled": true,
+    "isSchedulingEnabled": false,
+    "executionConditions": {
+        "@odata.type": "microsoft.graph.identityGovernance.triggerAndScopeBasedConditions",
+        "scope": {
+            "@odata.type": "microsoft.graph.identityGovernance.ruleBasedSubjectSet",
+            "rule": "[rule]"
+        },
+        "trigger": {
+            "@odata.type": "microsoft.graph.identityGovernance.timeBasedAttributeTrigger",
+            "timeBasedAttribute": "[timeBasedAttribute]",
+            "offsetInDays": "[offsetInDays]"
+        }
+    },
+    "tasks": [
+        {
+            "description": "Disable user account",
+            "displayName": "Disable User Account",
+            "isEnabled": true,
+            "continueOnError": true,
+            "taskDefinitionId": "1dfdfcc7-52fa-4c2e-bf3a-e3919cc12950",
+            "arguments": [
+                {
+                    "name": "disableOnPremisesAccount",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "continueOnError": true,
+            "displayName": "Remove user from all groups",
+            "description": "Remove user from all Entra ID groups memberships",
+            "isEnabled": true,
+            "taskDefinitionId": "b3a31406-2a15-4c9a-b25b-a658fa5f07fc",
+            "arguments": []
+        },
+        {
+            "continueOnError": false,
+            "description": "Remove all access packages assigned to the user",
+            "displayName": "Remove all access package assignments for user",
+            "isEnabled": true,
+            "taskDefinitionId": "42ae2956-193d-4f39-be06-691b8ac4fa1d",
+            "arguments": [
+                {
+                    "name": "daysUntilExpiration",
+                    "value": "0"
+                }
+            ]
+        },
+        {
+            "continueOnError": false,
+            "description": "Cancel all access package assignment requests pending for the user",
+            "displayName": "Cancel all pending access package assignment requests for user",
+            "isEnabled": true,
+            "taskDefinitionId": "498770d9-bab7-4e4c-b73d-5ded82a1d0b3",
+            "arguments": []
+        },
+        {
+            "continueOnError": false,
+            "description": "Revoke all refresh tokens for user",
+            "displayName": "Revoke all refresh tokens for user",
+            "isEnabled": true,
+            "taskDefinitionId": "509589a4-0466-4471-829e-49c5e502bdee",
+            "arguments": []
+        },
+        {
+            "continueOnError": false,
+            "description": "Send offboarding email to user’s manager on the last day of work",
+            "displayName": "Send email on user’s last day to manager",
+            "isEnabled": true,
+            "taskDefinitionId": "9c0a1eaf-5bda-4392-9d9e-6e155bb57411",
+            "arguments": [
+                {
+                    "name": "customSubject",
+                    "value": "Today is the last day of work for {{userDisplayName}}"
+                },
+                {
+                    "name": "customBody",
+                    "value": "Hello {{managerDisplayName}}\n\nThis is a reminder that <b>{{userDisplayName}}</b>'s last day is today and their access will be revoked.\n\nRegards\nYour IT department"
+                }
+            ]
+        }
+    ]
+}

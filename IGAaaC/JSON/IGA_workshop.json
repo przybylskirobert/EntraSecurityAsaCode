@@ -1,0 +1,252 @@
+{
+  "Prefix": "Hospital 1",
+  "Catalogs": [
+    {
+      "CatalogType": "Internal",
+      "Published": true,
+      "ExternalsName": null,
+      "Resources": [
+        {
+          "Id": "88a4172b-27f9-4e74-b71a-4a8f7a494dba", //this is object ID of the group//
+          "name": "Nurse Unit",
+          "Action": "ADD",
+          "Type": "Group",
+          "ResourceConfig": true
+        },
+        {
+          "Id": "853781c9-32f5-4be8-90d6-f32193ab37a0",//this is object ID of the group//
+          "name": "Epic - Traveling Nurse",
+          "Action": "ADD",
+          "Type": "Group",
+          "ResourceConfig": true
+        },
+        {
+          "Id": "7a2ccb84-00bc-4734-8f31-901300efd406",//this is object ID of the group//
+          "name": "Epic - Stationary Nurse",
+          "Action": "ADD",
+          "Type": "Group",
+          "ResourceConfig": true
+        },
+        {
+          "Id": "0ab4b3fb-eb5a-4952-b1d1-78b09b72c136",//this is object ID of the group//
+          "name": "Epic - Intern Nurse",
+          "Action": "ADD",
+          "Type": "Group",
+          "ResourceConfig": true
+        }
+      ],
+      "Roles": [
+        {
+          "RbacConfig": true,
+          "RoleName": "Owner",
+          "Objects": [
+            "Admin - Robert Przybylski"
+          ]
+        },
+        {
+          "RbacConfig": true,
+          "RoleName": "PackageManager",
+          "Objects": [
+            "Stephanie (TeamLeader)"
+          ]
+        }
+      ],
+      "AccessPackages": [
+        {
+          "PackageName": "Traveling Nurse role configuration",
+          "Hidden": false,
+          "Resources": [
+            {
+              "Type": "AadGroup",
+              "DisplayName": "Epic - Traveling Nurse",
+              "Role": "Member"
+            },
+            {
+              "Type": "AadGroup",
+              "DisplayName": "Nurse Unit",
+              "Role": "Member"
+            }
+          ],
+          "Policies": [
+            {
+              "PolicyDisplayName": "Policy",
+              "PolicyDescription": "Policy description",
+              "EnablePackage": true,
+              "TargetScope": "specificDirectoryUsers",
+              "AllowedTarget": "Jane (Nurse)",
+              "RequireApproval": true,
+              "RequireJustification": false,
+              "ManagerApproval": false,
+              "ExpirationDays": 12,
+              "ApproverDisplayName": "Stephanie (TeamLeader)",
+              "EnableAccessReview": false,
+              "OnBehalfRequestors": "Stephanie (TeamLeader)"
+            }
+          ]
+        },
+        {
+          "PackageName": "Stationary Nurse role configuration",
+          "Hidden": false,
+          "Resources": [
+            {
+              "Type": "AadGroup",
+              "DisplayName": "Epic - Stationary Nurse",
+              "Role": "Member"
+            },
+            {
+              "Type": "AadGroup",
+              "DisplayName": "Nurse Unit",
+              "Role": "Member"
+            }
+          ],
+          "Policies": [
+            {
+              "PolicyDisplayName": "Policy",
+              "PolicyDescription": "Policy description",
+              "EnablePackage": true,
+              "TargetScope": "specificDirectoryUsers",
+              "AllowedTarget": "Jane (Nurse)",
+              "RequireApproval": true,
+              "RequireJustification": false,
+              "ManagerApproval": false,
+              "ExpirationDays": 12,
+              "ApproverDisplayName": "Stephanie (TeamLeader)",
+              "EnableAccessReview": false
+            }
+          ]
+        },
+        {
+          "PackageName": "Intern Nurse role configuration",
+          "Hidden": false,
+          "Resources": [
+            {
+              "Type": "AadGroup",
+              "DisplayName": "Epic - Intern Nurse",
+              "Role": "Member"
+            },
+            {
+              "Type": "AadGroup",
+              "DisplayName": "Nurse Unit",
+              "Role": "Member"
+            }
+          ],
+          "Policies": [
+            {
+              "PolicyDisplayName": "Policy",
+              "PolicyDescription": "Policy description",
+              "EnablePackage": true,
+              "TargetScope": "specificDirectoryUsers",
+              "AllowedTarget": "Jane (Nurse)",
+              "RequireApproval": true,
+              "RequireJustification": false,
+              "ManagerApproval": false,
+              "ExpirationDays": 12,
+              "ApproverDisplayName": "Stephanie (TeamLeader)",
+              "EnableAccessReview": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ConnectedOrganizations": [
+    {
+      "DisplayName": "AzureBlog.pl",
+      "ConfigurationType": "DomainName",
+      "DomainName": "azureblog.pl",
+      "State": "configured"
+    }
+  ],
+  "AccessReviews": [
+    {
+      "AccessReviewName": "AccessReview Nurse Unit",
+      "ReviewGroupType": "Group",
+      "GroupName": "Doctors",
+      "ReviewerType": "SelectedUsers",
+      "ReviewerName": "Admin - Robert Przybylski",
+      "DurationDays": 10,
+      "ReviewReocurence": "Monthly",
+      "StartDate": "2025-10-15"
+    },
+    {
+      "AccessReviewName": "AccessReview Traveling Nurse",
+      "ReviewGroupType": "Group",
+      "GroupName": "Epic - Traveling Nurse",
+      "ReviewerType": "SelectedUsers",
+      "ReviewerName": "Stephanie (TeamLeader)",
+      "DurationDays": 10,
+      "ReviewReocurence": "OneTime",
+      "StartDate": "2025-10-15"
+    },
+    {
+      "AccessReviewName": "AccessReview Epic - Stationary Nurse",
+      "ReviewGroupType": "Group",
+      "GroupName": "Marketing",
+      "ReviewerType": "SelectedUsers",
+      "ReviewerName": "Admin - Robert Przybylski",
+      "DurationDays": 10,
+      "ReviewReocurence": "Monthly",
+      "StartDate": "2025-10-15"
+    }
+  ],
+  "LifecycleWorkflowsSetup": [
+    {
+      "WorkflowScheduleIntervalInHours": 1,
+      "SenderDomain": "mvp.entrablog.com", //Provide your domain here//
+      "UseCompanyBranding": true,
+      "WhatIf": false
+    }
+  ],
+  "LifecycleWorkflowsConfig": [
+    {
+      "DisplayName": "Joiner-3Days",
+      "Rule": "(department eq 'Nurse Unit')",
+      "TimeBasedAttribute": "employeeHireDate",
+      "OffsetInDaysule": 3,
+      "Template": "Joiner-3Days",
+      "WhatIf": false
+    },
+    {
+      "DisplayName": "Joiner-0Day",
+      "Rule": "(department eq 'Nurse Unit')",
+      "TimeBasedAttribute": "employeeHireDate",
+      "OffsetInDaysule": 3,
+      "Template": "Joiner-0Day",
+      "WhatIf": false
+    },
+    {
+      "DisplayName": "Leaver-0Day",
+      "Rule": "(department eq 'Nurse Unit')",
+      "TimeBasedAttribute": "employeeLeaveDateTime",
+      "OffsetInDaysule": 0,
+      "Template": "Leaver-0Day",
+      "WhatIf": false
+    },
+    {
+      "DisplayName": "Leaver-3Days",
+      "Rule": "(department eq 'Nurse Unit')",
+      "TimeBasedAttribute": "employeeLeaveDateTime",
+      "OffsetInDaysule": 0,
+      "Template": "Leaver-3Days",
+      "WhatIf": false
+    },
+    {
+      "DisplayName": "Mover-0Day",
+      "Rule": "(department eq 'Nurse Unit')",
+      "TimeBasedAttribute": "employeeLeaveDateTime",
+      "OffsetInDaysule": 0,
+      "Template": "Mover-0Day",
+      "WhatIf": false
+    }
+  ],
+  "LifecycleWorkflowsRun": [
+    {
+      "WorkflowName": "Joiner-3Days",
+      "IncludedSubjects": [
+        "joiner@mvp.entrablog.com",
+        "NewComers"
+      ],
+      "WhatIf": false
+    }
+  ]
+}

@@ -1,53 +1,43 @@
-[CmdletBinding()]
 param (
     [Parameter(Mandatory = $true)]
-    [string]$JsonPath,
+    [string]$DisplayName,
 
     [Parameter(Mandatory = $false)]
-    [switch]$EnableLogs
+    [string]$Language,
+
+    [Parameter(Mandatory = $true)]
+    [switch]$RequireAcknowledgment,
+
+    [Parameter(Mandatory = $false)]
+    [switch]$RequireConsentOnEveryDevice,
+
+    [Parameter(Mandatory = $false)]
+    [switch]$ExpireConsents,
+
+    [Parameter(Mandatory = $false)]
+    [ValidateSet("P30D", "P90D", "P180D", "P365D")]
+    [string]$ExpireConsentsFrequency,
+
+    [Parameter(Mandatory = $false)]
+    [string]$ConsentsFrequency,
+
+    [Parameter(Mandatory = $false, HelpMessage = "Provide date in yyyy.MM.dd format")]
+    [string]$StartDate,
+    
+    [Parameter(Mandatory = $false)]
+    [switch] $EnableLogs
 )
 
 try {
-    $message = $MyInvocation.MyCommand.Name
-
     if ($EnableLogs) {
         $scriptPath = $MyInvocation.MyCommand.Path
-        $scriptDir = Join-Path (Split-Path -Path $scriptPath) "Logs"
-        if (-not (Test-Path $scriptDir)) { New-Item -ItemType Directory -Path $scriptDir | Out-Null }
+        $scriptDir = Split-Path -Path $scriptPath
+        $scriptDir = $scriptDir + "/Logs"
         $scriptName = [System.IO.Path]::GetFileNameWithoutExtension($scriptPath)
         $dateTime = (Get-Date).ToString("yyyy_MM-dd HH_mm_ss")
         $logFileName = "$scriptName`_$dateTime.log"
         $logFilePath = Join-Path -Path $scriptDir -ChildPath $logFileName
         Start-Transcript -Path $logFilePath -NoClobber -UseMinimalHeader -Append -Force
-    }
-
-    if (-not (Test-Path $JsonPath)) {
-        Write-Host "[$message]: " -NoNewline
-        Write-Host "❌ JSON file not found at path: $JsonPath" -ForegroundColor Red
-        return
-    }
-
-    $json = Get-Content -Path $JsonPath -Raw | ConvertFrom-Json
-    $DisplayName = $json.DisplayName
-    $Language = $json.Language
-    $RequireAcknowledgment = $json.RequireAcknowledgment
-    $RequireConsentOnEveryDevice = $json.RequireConsentOnEveryDevice
-    $ExpireConsents = $json.ExpireConsents
-    $ExpireConsentsFrequency = "P$($json.ExpireConsentsFrequency)D"
-    $ConsentsFrequency = $json.ConsentsFrequency
-    if ($json.StartDate) {
-            try {
-                $format = "yyyy-MM-dd"
-                $culture = [System.Globalization.CultureInfo]::InvariantCulture
-                $trimmedDate = $($json.StartDate).Trim()
-
-                $parsedDate = [datetime]::ParseExact($trimmedDate, $format, $culture)
-                $startDateFormatted = $parsedDate.ToString("yyyy-MM-ddTHH:mm:ssZ")
-            }
-            catch {
-                Write-Error "❌ Invalid StartDate format. Expected 'yyyy-MM-dd'. Provided: '$($json.StartDate)'"
-                return
-            }        
     }
 
     $output = @(
@@ -59,10 +49,12 @@ try {
                 ExpireConsents              = $ExpireConsents;
                 ExpireConsentsFrequency     = $ExpireConsentsFrequency; 
                 ConsentsFrequency           = $ConsentsFrequency; 
-                StartDate                   = $startDateFormatted
+                StartDate                   = $StartDate;
+                Enabled                     = $Enabled
             }
         )
     )
+    $message = "[$($MyInvocation.MyCommand.Name)]: "
 
     if (-not (Get-Module Microsoft.Graph.Identity.Governance)) {
         Write-Host "[$message]: Importing Microsoft.Graph.Identity.Governance module..."
@@ -74,26 +66,27 @@ try {
         Connect-MgGraph -Scopes "Agreement.ReadWrite.All" -NoWelcome
     }
 
-    $isViewingBeforeAcceptanceRequired = $RequireAcknowledgment
-    $isPerDeviceAcceptanceRequired = $RequireConsentOnEveryDevice
+    $isViewingBeforeAcceptanceRequired = $RequireAcknowledgment.IsPresent
+    $isPerDeviceAcceptanceRequired = $RequireConsentOnEveryDevice.IsPresent
 
     $termsExpiration = $null
     $userReacceptRequiredFrequency = $null
 
-    Write-Host "[$message]: " -nonewline
-    Write-Host "🚀 Starting configuration of Terms Of Use '$DisplayName'..." -ForegroundColor Cyan
-
     if ((Get-MgIdentityGovernanceTermsOfUseAgreement | Where-Object { $_.DisplayName -eq $DisplayName }) -eq $null) {
+        if ($StartDate) {
+            $format = "yyyy.MM.dd"
+            $culture = [System.Globalization.CultureInfo]::InvariantCulture
+            $date = ([datetime]::ParseExact($StartDate, $format, $culture)).ToString("yyyy-MM-ddTHH:mm:ssZ")
+        }
 
         if ($ExpireConsents) {
-            if (-not $ExpireConsentsFrequency -or -not $ConsentsFrequency -or -not $startDateFormatted) {
-                Write-Host "[$message]:  " -nonewline
-                Write-Host "⚠️ If ExpireConsents is enabled, ExpireConsentsFrequency, ConsentsFrequency, and StartDate are required."
+            if (-not $ExpireConsentsFrequency -or -not $ConsentsFrequency -or -not $StartDate) {
+                Write-Error -Message "If ExpireConsents is enabled, ExpireConsentsFrequency, ConsentsFrequency, and StartDate are required."
                 return
             }
 
             $termsExpiration = @{
-                startDateTime = $startDateFormatted
+                startDateTime = $date
                 frequency     = $ExpireConsentsFrequency
             }
             $userReacceptRequiredFrequency = [System.TimeSpan]::FromDays($ConsentsFrequency)
@@ -121,20 +114,16 @@ try {
         }
 
         try {
-            Write-Host "[$message]:    " -nonewline
-            Write-Host "➕ Adding new terms of use '$DisplayName'" -ForegroundColor Green
-
-            New-MgIdentityGovernanceTermsOfUseAgreement -BodyParameter $termsOfUse -ErrorAction SilentlyContinue | out-null
-            Write-Host "[$message]: " -nonewline
-            Write-Host "🏁 Terms of Use '$DisplayName' configuration completed successfully." -ForegroundColor Cyan
+            New-MgIdentityGovernanceTermsOfUseAgreement -BodyParameter $termsOfUse | out-null
+            Write-Host "$message Terms of Use configuration completed successfully." -ForegroundColor Green
+            $output
         }
         catch {
             Write-Error "Failed to create Terms of Use: $_"
         }
     }
     else {
-        Write-Host "[$message]:    " -nonewline
-        Write-Host "ℹ️ Terms Of Use '$DisplayName' already exists." -ForegroundColor Gray
+        Write-Host "$message Terms Of Use  '$DisplayName' already exists." -ForegroundColor Red
     }
     if ($EnableLogs) {
         Stop-Transcript

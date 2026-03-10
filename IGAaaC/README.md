@@ -1,5 +1,6 @@
 # Entra ID Governance as a Code
 **Created:** 2025-05-24
+** Updated:** 2026-03-10
 
 
 ## Configurations done by this repo
@@ -11,13 +12,15 @@
 - Configuring Entitlement management PIM for Roles using json file
 - Configuring Entitlement management PIM for Groups using json file
 - Configuring Entitlement management Terms of Use using json file
+- Configuring Lifecycle workkflows using json file
+
 
 ## How to use this repo
 
 ### 1. Configuring Entitlement management Settings 
 
 ```powershell
-./Set-EntraIDELMSettings.ps1 -JsonPath ./JSON/EntitlementManagement.json  -EnableLogs
+./Set-EntraIDELMSettings.ps1 -JsonPath ./JSON/IGA_Workshop.json  -EnableLogs
 ```
 
 #### Example Result
@@ -32,7 +35,7 @@
 
 
 ```powershell
-./Set-EntraIDELMCatalog.ps1 -JsonPath ./JSON/EntitlementManagement.json  -EnableLogs
+./Set-EntraIDELMCatalog.ps1 -JsonPath ./JSON/IGA_Workshop.json  -EnableLogs
 ```
 
 #### Example Result
@@ -79,7 +82,7 @@
 ### 3. Configuring Entitlement management Connected Organizations
 
 ```powershell
-./Set-EntraIDELMConnectedOrganizations -JsonPath ./JSON/EntitlementManagement.json  -EnableLogs
+./Set-EntraIDELMConnectedOrganizations -JsonPath ./JSON/IGA_Workshop.json  -EnableLogs
 ```
 
 #### Example Result
@@ -90,7 +93,7 @@
 ### 4. Configuring Entitlement management Access Packages
 
 ```powershell
-./New-EntraIDELMAccessPackage.ps1 -JsonPath ./JSON/EntitlementManagement.json  -EnableLogs
+./New-EntraIDELMAccessPackage.ps1 -JsonPath ./JSON/IGA_Workshop.json  -EnableLogs
 ```
 
 #### Example Result
@@ -118,7 +121,7 @@
 ### 5. Configuring Entitlement management Access Reviews
 
 ```powershell
-./New-EntraIDELMAccessReview.ps1 -JsonPath ./JSON/EntitlementManagement.json  -EnableLogs
+./New-EntraIDELMAccessReview.ps1 -JsonPath ./JSON/IGA_Workshop.json -EnableLogs
 ```
 
 #### Example Result
@@ -215,3 +218,54 @@
 [New-EntraIDToU.ps1]: 🚀 Starting configuration of Terms Of Use 'Terms of Use'...
 [New-EntraIDToU.ps1]:    ℹ️ Terms Of Use 'Terms of Use' already exists.
 ```
+
+### 9. Configuring Lifecycle Workflows  Configuration
+```powershell
+./New-EntraIDLCWConfig.ps1 -WorkflowScheduleIntervalInHours 1 -SenderDomain "mvp.entrablog.com" -UseCompanyBranding $false
+```
+
+#### Example Result
+```powershell
+```
+
+
+### 9. Configuring Lifecycle Workflows  Setup
+```powershell
+$jsonPath = "./JSON/IGA_workshop.json"
+$config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
+
+foreach ($LCWSetup in $config.LifecycleWorkflowsSetup){
+    ./New-EntraIDLCWSetup.ps1 `
+	-WorkflowScheduleIntervalInHours $LCWSetup.WorkflowScheduleIntervalInHours `
+	-SenderDomain $LCWSetup.SenderDomain `
+	-UseCompanyBranding $LCWSetup.UseCompanyBranding`
+	-EnableLogs
+}
+```
+
+#### Example Result
+```powershell
+```
+
+### 10. Configuring Lifecycle Workflows  Configuration
+```powershell
+
+$jsonPath = "./JSON/IGA_workshop.json"
+$config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
+
+foreach ($LCWConfig in $config.LifecycleWorkflowsConfig){
+    ./New-EntraIDLCWConfig.ps1 `
+	-DisplayName $LCWConfig.DisplayName `
+	-Rule $LCWConfig.Rule `
+	-TimeBasedAttribute $LCWConfig.TimeBasedAttribute `
+	-OffsetInDays $LCWConfig.OffsetInDays `
+	-Template $LCWConfig.Template `
+	-WhatIF $LCWConfig.WhatIF `
+	-EnableLogs
+}
+```
+
+#### Example Result
+```powershell
+```
+

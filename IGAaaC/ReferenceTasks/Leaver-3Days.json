@@ -1,0 +1,38 @@
+{
+    "displayName": "[displayName]",
+    "description": "[description]",
+    "category": "Leaver",
+    "isEnabled": true,
+    "isSchedulingEnabled": false,
+    "executionConditions": {
+        "@odata.type": "microsoft.graph.identityGovernance.triggerAndScopeBasedConditions",
+        "scope": {
+            "@odata.type": "microsoft.graph.identityGovernance.ruleBasedSubjectSet",
+            "rule": "[rule]"
+        },
+        "trigger": {
+            "@odata.type": "microsoft.graph.identityGovernance.timeBasedAttributeTrigger",
+            "timeBasedAttribute": "[timeBasedAttribute]",
+            "offsetInDays": "[offsetInDays]"
+        }
+    },
+    "tasks": [
+        {
+            "continueOnError": false,
+            "description": "Send offboarding email to user’s manager before the last day of work",
+            "displayName": "Send email before user’s last day to manager",
+            "isEnabled": true,
+            "taskDefinitionId": "52853a3e-f4e5-4eb8-bb24-1ac09a1da935",
+            "arguments": [
+                {
+                    "name": "customSubject",
+                    "value": "Reminder that {{userDisplayName}}'s last day is coming up"
+                },
+                {
+                    "name": "customBody",
+                    "value": "Hello {{managerDisplayName}}\n\nThis is a reminder that <b>{{userDisplayName}}'s</b> last day is set to <b>{{userEmployeeLeaveDateTime}}</b>.\n\nRegards\nYour IT department"
+                }
+            ]
+        }
+    ]
+}

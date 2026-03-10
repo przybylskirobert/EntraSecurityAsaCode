@@ -25,12 +25,12 @@ try {
     }
     $message = "[$($MyInvocation.MyCommand.Name)]: "
 
-    if (-not (Get-Module Microsoft.Graph.Identity.SignIns)) {
-        Write-Host "[$message]: Importing Microsoft.Graph module..."
+    if (-not (Get-Module Microsoft.Graph )) {
+        Write-Host "$message Importing Microsoft.Graph module..." -ForegroundColor Yellow
         Import-Module Microsoft.Graph -ErrorAction Stop
     }
     if (-not (Get-MgContext)) {
-        Write-Host "[$message]: Connecting to Microsoft Graph..."
+        Write-Host "$message Connecting to Microsoft Graph..."
         Connect-MgGraph -Scopes 'Organization.Read.All', "Policy.ReadWrite.ConsentRequest", "Directory.ReadWrite.All", "Group.ReadWrite.All" -NoWelcome
     }
     if (!(Test-Path -Path "$SourcesLocation/")) {

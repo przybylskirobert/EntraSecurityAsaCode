@@ -13,7 +13,7 @@
 ### 1. Configure Admin Consent Request Policy
 
 ```powershell
-./Set-EntraIDAdminConsentRequestPolicy.ps1 -EnableLogs -BackupSettings -ConfigurePolicy -GroupName "LAB - Admin consent requests"
+./Set-EntraIDAdminConsentRequestPolicy.ps1 -EnableLogs -BackupSettings -ConfigurePolicy -GroupName "Entra POC - Admin consent requests"
 ```
 
 #### Example Result

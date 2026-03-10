@@ -1,0 +1,135 @@
+{
+    "Prefix": "Formula5 POC",
+    "PIMRoles": [
+      {
+        "RoleName": "Application Administrator",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT1H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": true,
+          "RequireJustificationOnActiveAssignement": true,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": true,
+          "RequireApprovalOnActivation": true
+        }
+      },
+      {
+        "RoleName": "Authentication Policy Administrator",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT1H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": true,
+          "RequireJustificationOnActiveAssignement": true,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": true,
+          "RequireApprovalOnActivation": true
+        }
+      },
+      {
+        "RoleName": "Cloud Application Administrator",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT1H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": true,
+          "RequireJustificationOnActiveAssignement": true,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": true,
+          "RequireApprovalOnActivation": true
+        }
+      },
+      {
+        "RoleName": "Compliance Administrator",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT1H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": true,
+          "RequireJustificationOnActiveAssignement": true,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": true,
+          "RequireApprovalOnActivation": true
+        }
+      },
+      {
+        "RoleName": "Compliance Data Administrator",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT1H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": true,
+          "RequireJustificationOnActiveAssignement": true,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": true,
+          "RequireApprovalOnActivation": true
+        }
+      },
+      {
+        "RoleName": "Global Administrator",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT1H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": true,
+          "RequireJustificationOnActiveAssignement": true,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": true,
+          "RequireApprovalOnActivation": true
+        }
+      },
+      {
+        "RoleName": "Hybrid Identity Administrator",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT1H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": true,
+          "RequireJustificationOnActiveAssignement": true,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": true,
+          "RequireApprovalOnActivation": true
+        }
+      },
+      {
+        "RoleName": "Privileged Authentication Administrator",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT1H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": true,
+          "RequireJustificationOnActiveAssignement": true,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": true,
+          "RequireApprovalOnActivation": true
+        }
+      },
+      {
+        "RoleName": "Privileged Role Administrator",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT1H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": true,
+          "RequireJustificationOnActiveAssignement": true,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": true,
+          "RequireApprovalOnActivation": true
+        }
+      },
+      {
+        "RoleName": "Security Administrator",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT1H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": true,
+          "RequireJustificationOnActiveAssignement": true,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": true,
+          "RequireApprovalOnActivation": true
+        }
+      }
+    ]
+  }

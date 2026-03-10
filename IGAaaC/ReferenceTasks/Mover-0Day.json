@@ -1,0 +1,42 @@
+{
+    "displayName": "[displayName]",
+    "description": "[description]",
+    "category": "mover",
+    "isEnabled": true,
+    "isSchedulingEnabled": false,
+    "executionConditions": {
+        "@odata.type": "microsoft.graph.identityGovernance.triggerAndScopeBasedConditions",
+        "scope": {
+            "@odata.type": "microsoft.graph.identityGovernance.ruleBasedSubjectSet",
+            "rule": "[rule]"
+        },
+        "trigger": {
+            "@odata.type": "#microsoft.graph.identityGovernance.attributeChangeTrigger",
+            "triggerAttributes": [
+                {
+                    "name": "department"
+                }
+            ]
+        }
+    },
+    "tasks": [
+        {
+            "category": "mover",
+            "continueOnError": false,
+            "description": "Send email to notify user's manager of user move",
+            "displayName": "Send email to notify manager of user move",
+            "isEnabled": true,
+            "taskDefinitionId": "aab41899-9972-422a-9d97-f626014578b7",
+            "arguments": [
+                {
+                    "name": "customSubject",
+                    "value": "{{userDisplayName}} has moved"
+                },
+                {
+                    "name": "customBody",
+                    "value": "Hello {{managerDisplayName}}\n\nWe are reaching out to let you know <b>{{userDisplayName}}</b> has moved in the organization.\n\nRegards\nYour IT department"
+                }
+            ]
+        }
+    ]
+}

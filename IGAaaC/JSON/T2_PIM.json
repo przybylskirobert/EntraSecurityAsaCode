@@ -1,0 +1,148 @@
+{
+    "Prefix": "Formula5 POC",
+    "PIMRoles": [
+      {
+        "RoleName": "Directory Readers",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT8H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": false,
+          "RequireJustificationOnActiveAssignement": false,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": false,
+          "RequireApprovalOnActivation": false
+        }
+      },
+      {
+        "RoleName": "Security Reader",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT8H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": false,
+          "RequireJustificationOnActiveAssignement": false,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": false,
+          "RequireApprovalOnActivation": false
+        }
+      },
+      {
+        "RoleName": "Reports Reader",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT8H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": false,
+          "RequireJustificationOnActiveAssignement": false,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": false,
+          "RequireApprovalOnActivation": false
+        }
+      },
+      {
+        "RoleName": "Message Center Reader",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT8H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": false,
+          "RequireJustificationOnActiveAssignement": false,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": false,
+          "RequireApprovalOnActivation": false
+        }
+      },
+      {
+        "RoleName": "Message Center Privacy Reader",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT8H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": false,
+          "RequireJustificationOnActiveAssignement": false,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": false,
+          "RequireApprovalOnActivation": false
+        }
+      },
+      {
+        "RoleName": "Global Reader",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT8H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": false,
+          "RequireJustificationOnActiveAssignement": false,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": false,
+          "RequireApprovalOnActivation": false
+        }
+      },
+      {
+        "RoleName": "Usage Summary Reports Reader",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT8H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": false,
+          "RequireJustificationOnActiveAssignement": false,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": false,
+          "RequireApprovalOnActivation": false
+        }
+      },
+      {
+        "RoleName": "Attribute Definition Reader",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT8H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": false,
+          "RequireJustificationOnActiveAssignement": false,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": false,
+          "RequireApprovalOnActivation": false
+        }
+      },
+      {
+        "RoleName": "Attribute Assignment Reader",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT8H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": false,
+          "RequireJustificationOnActiveAssignement": false,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": false,
+          "RequireApprovalOnActivation": false
+        }
+      },
+      {
+        "RoleName": "Attribute Log Reader",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT8H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": false,
+          "RequireJustificationOnActiveAssignement": false,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": false,
+          "RequireApprovalOnActivation": false
+        }
+      },
+      {
+        "RoleName": "Attribute Provisioning Reader",
+        "AssignmentPolicy": {
+          "ActivationMaxDurationInHours": "PT8H",
+          "ExpireEligibleAssignmentsAfterDays": "P180D",
+          "ExpireActiveAssignmentsAfterDays": "P180D",
+          "RequireMFAOnActiveAssignement": false,
+          "RequireJustificationOnActiveAssignement": false,
+          "RequireMFAOnActivation": true,
+          "RequireJustificationOnActivation": false,
+          "RequireApprovalOnActivation": false
+        }
+      }
+    ]
+  }
