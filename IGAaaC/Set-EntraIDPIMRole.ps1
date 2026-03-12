@@ -233,6 +233,13 @@ try {
                 Write-Host "$message Group '$pimApproversGroupName' does not exist. Creating a new group..." -ForegroundColor Cyan
                 $group = New-MgGroup -DisplayName $pimApproversGroupName -MailEnabled:$false -MailNickname $pimApproversGroupName.Replace(" ", "") -SecurityEnabled:$true -Description $groupDescription
                 $groupID = $group.ID
+                do {
+                    $existingGroup = Get-MgGroup -GroupId $groupID -ErrorAction SilentlyContinue
+                    if (-not $existingGroup) {
+                        Write-Host "$message Group not available yet. Waiting 5 seconds..."
+                        Start-Sleep -Seconds 5
+                    }
+                } while (-not $existingGroup)
                 Write-Host "$message Group '$pimApproversGroupName' created successfully with the description: '$groupDescription'." -ForegroundColor Cyan
             }
         }

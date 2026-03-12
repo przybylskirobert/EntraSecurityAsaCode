@@ -48,7 +48,7 @@ $List = @(
     $(New-Object PSObject -Property @{Name = "Risky Countries";CountryList = "BY,KP,RU,IR";IP = ""}),
     $(New-Object PSObject -Property @{Name = "Trusted IPs for service accounts";CountryList = "";IP = "109.241.14.130/32"})
 )
-./New-EntraIDNamedLocation.ps1 -List $List -Prefix "Ennoble Care" -EnableLogs
+./New-EntraIDNamedLocation.ps1 -List $List -Prefix "LAB" -EnableLogs
 ```
 #### Example Result
 - EntraBlog POC - Allowed Countries
@@ -77,9 +77,9 @@ $List = @(
 ```powershell
 Transcript started, output file is /formula5/CaaC/Logs/New-EntraIDNamedLocation_2025_01-24_13_43_07.log
 [New-EntraIDNamedLocation.ps1] : Starting named locations creation...
-[New-EntraIDNamedLocation.ps1] : Creating new Conditional Access Named Location 'Ennoble Care - Allowed Countries'
-[New-EntraIDNamedLocation.ps1] : Creating new Conditional Access Named Location 'Ennoble Care - Risky Countries'
-[New-EntraIDNamedLocation.ps1] : Creating new Conditional Access Named Location 'Ennoble Care  - Trusted IPs for service accounts'
+[New-EntraIDNamedLocation.ps1] : Creating new Conditional Access Named Location 'LAB - Allowed Countries'
+[New-EntraIDNamedLocation.ps1] : Creating new Conditional Access Named Location 'LAB - Risky Countries'
+[New-EntraIDNamedLocation.ps1] : Creating new Conditional Access Named Location 'LAB  - Trusted IPs for service accounts'
 
 List
 ----                                                                                                                                           
@@ -95,7 +95,7 @@ $List = @(
     $(New-Object PSObject -Property @{Name = "[Prefix]CA Exclude - Service Accounts"}),
     $(New-Object PSObject -Property @{Name = "[Prefix]CA Include - Admins"})
 )
-./New-EntraIDGroups.ps1 -List $List -Prefix "Ennoble Care" -EnableLogs
+./New-EntraIDGroups.ps1 -List $List -Prefix "LAB" -EnableLogs
 ```
 #### Example Result
 - EntraBlog POC - CA Exclude ALL
@@ -150,7 +150,7 @@ Transcript stopped, output file is /formula5/CaaC/Logs/New-EntraIDGroups_2025_01
 ### 4. When having groups and named locations we can implement conditional access policies 
 
 ```powershell
-./New-EntraIDConditionalAccessPolicyFromJson.ps1 -Prefix "Ennoble Care" -Mode "Report-Only" -EnableLogs -SourcesLocation "./Sources"
+./New-EntraIDConditionalAccessPolicyFromJson.ps1 -Prefix "LAB" -Mode "Report-Only" -EnableLogs -SourcesLocation "./Sources"
 ```
 
 #### Example Result

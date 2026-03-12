@@ -160,3 +160,15 @@ Transcript started, output file is /SaaC/Logs/Set-EntraIDPolicyAuthorizationPoli
 [Set-EntraIDPolicyAuthorizationPolicy.ps1]:  https://entra.microsoft.com/#view/Microsoft_AAD_UsersAndTenants/UserManagementMenuBlade/~/UserSettings/menuId/UserSettings and https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ConsentPoliciesMenuBlade/~/UserSettings
 Transcript stopped, output file is /SaaC/Logs/Set-EntraIDPolicyAuthorizationPolicy_2025_05-14-21_26_21.log
 ```
+
+### 5. Configure Policy Authorization Policy for M365 Groups
+
+```powershell
+./Set-EntraIDPolicyAuthorizationPoilicyForM365Groups.ps1 -EnableLogs -ConfigurePolicy -BackupSettings
+```
+
+### 6. Configure Device Settings
+
+```powershell
+./Set-EntraIDDeviceSettings.ps1 -EnableLogs -ConfigurePolicy -BackupSettings
+```

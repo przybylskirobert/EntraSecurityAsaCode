@@ -1,0 +1,19 @@
+{
+  "url": "https://entra.microsoft.com/#view/Microsoft_AAD_Devices/DevicesMenuBlade/~/DeviceSettings/menuId/Overview",
+  "name": "Device Settings Policy",
+  "AzureAdJoin": {
+    "IsAdminConfigurable": false,
+    "localAdmins": {
+      "enableGlobalAdmins": true
+    }
+  },
+  "AzureAdRegistration": {
+    "IsAdminConfigurable": true
+  },
+  "Id": "deviceRegistrationPolicy",
+  "LocalAdminPassword": {
+    "IsEnabled": true
+  },
+  "MultiFactorAuthConfiguration": "Required",
+  "UserDeviceQuota": 20
+}

@@ -1,0 +1,20 @@
+{
+  "url": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/GroupsManagementMenuBlade/~/General/menuId/Overview",
+  "name": "Policy Authorization Policy For M365 Groups",
+  "GroupSettingId": "ae59b63f-e0a8-4b37-bd43-f55ce9720c6d",
+  "AllowGuestsToAccessGroups": true,
+  "CustomBlockedWordsList": "Words,Drugs,Alkohol,sex,firearm",
+  "AllowToAddGuests": true,
+  "EnableMIPLabels": false,
+  // "GroupCreationAllowedGroupId": "",
+  "PrefixSuffixNamingRequirement": "G_[GroupName]",
+  //"DefaultClassification": "",
+  //"ClassificationDescriptions":"", 
+  "AllowGuestsToBeGroupOwner": false,
+  //"UsageGuidelinesUrl": "",
+  //"GuestUsageGuidelinesUrl": "",
+  //"ClassificationList": "",
+  "NewUnifiedGroupWritebackDefault": true,
+  "EnableGroupCreation": false,
+  "EnableMSStandardBlockedWords": false
+}
