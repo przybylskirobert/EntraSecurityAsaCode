@@ -7,6 +7,8 @@
 - Configuring Authentication Methods Policy
 - Configuring Password Rule Settings
 - Configuring Policy Authorization Policy
+- Configuring Policy Authorization Policy for M365 Groups
+- Configuring Device Settings
 ## How to use this repo
 
 
